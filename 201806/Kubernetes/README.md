@@ -303,14 +303,11 @@ Note:
 
 ### sample
 ```bash
-# get source
-git clone https://github.com/awskrug/handson-labs-2018
-
 # install
-kubectl apply -f handson-labs-2018/3_Kubernetes/sample-web.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
 
 # delete
-kubectl delete -f handson-labs-2018/3_Kubernetes/sample-web.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
 ```
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#LoadBalancers
 
@@ -331,7 +328,7 @@ Note:
 Kubernetes Dashboard is a general purpose, web-based UI for Kubernetes clusters.
 ```bash
 # install
-kubectl apply -f handson-labs-2018/3_Kubernetes/dashboard.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/dashboard.yml
 
 # get dashboard token
 kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | grep kubernetes-dashboard-token | awk '{print $1}')
@@ -341,7 +338,7 @@ kubectl create clusterrolebinding cluster-admin:kube-system:kubernetes-dashboard
 kubectl get clusterrolebindings | grep cluster-admin
 
 # delete
-kubectl delete -f handson-labs-2018/3_Kubernetes/dashboard.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/dashboard.yml
 ```
 * https://github.com/kubernetes/dashboard/
 
@@ -356,14 +353,14 @@ Note:
 Heapster enables Container Cluster Monitoring and Performance Analysis for Kubernetes - DEPRECATED
 ```bash
 # install
-kubectl apply -f handson-labs-2018/3_Kubernetes/heapster.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/heapster.yml
 
 # monitoring
 kubectl top pod --all-namespaces
 kubectl top pod -n kube-system
 
 # delete
-kubectl delete -f handson-labs-2018/3_Kubernetes/heapster.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/heapster.yml
 ```
 * https://github.com/kubernetes/heapster/
 
