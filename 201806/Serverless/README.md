@@ -78,11 +78,10 @@ Note:
 ### Serverless
 
 * Terraform
-* GitLab CI/CD
+* Circle CI
 
 Note:
-- 서버리스 서비스를 배포/운영 하기 위하여 Terraform 과 GitLab 을 사용해 봅니다.
-- 물론 GitLab 말고도 CircleCI 같은 서비스도 훌륭하고 또한 잘 동작 합니다.
+- 서버리스 서비스를 배포/운영 하기 위하여 Terraform 과 Circle CI 를 사용해 봅니다.
 
 ---
 
@@ -148,24 +147,24 @@ Note:
 
 ---
 
-## GitLab CI/CD
+## Circle CI
 
-* Pipelines
-* Schedules
+* Workflow
+* Schedule
 
 Note:
 - 이제 이런 구성을 AWS 에 생성/운영 해야 하는데요.
-- GitLab 에서는 Pipelines 과 Schedules 을 제공 하고 있습니다.
+- Circle CI 에서는 Workflow 와 Schedule 을 제공 하고 있습니다.
 
 ---
 
-### Pipelines
+### Workflow
 
 * Docker based Pipeline
 * Push and Deploy
 
 Note:
-- 파이프라인은 Docker 기반으로 Stage 를 구성 하며,
+- 파이프라인은 Docker 기반으로 Jobs 을 구성 하며,
 - maven, node 이미지 뿐만 아니라, terraform 이미지도 사용 할수 있습니다.
 - 그리고 인프라 코드가 변경 되면 자동으로 재 배포를 진행 합니다.
 
@@ -187,9 +186,9 @@ Note:
 ## Demo
 
 Note:
-GitHub > GitLab > AWS Console (Lambda, API G/W, S3, SNS, Route53)
+GitHub > Circle CI > AWS Console (Lambda, API G/W, S3, SNS, Route53)
 * https://github.com/nalbam/terraform-serverless/blob/master/main.tf
-* https://gitlab.com/nalbam/terraform-serverless/pipelines
+* https://circleci.com/gh/nalbam/terraform-serverless
 * https://demo-api.saymoji.com/demos/3
 * https://demo-static.saymoji.com/
 
