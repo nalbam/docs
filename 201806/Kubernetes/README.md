@@ -152,7 +152,7 @@ cat <<EOF > kubernetes.list
 deb http://apt.kubernetes.io/ kubernetes-xenial main
 EOF
 sudo mv kubernetes.list /etc/apt/sources.list.d/kubernetes.list
-sudo apt update && sudo apt install -y kubectl jq
+sudo apt update && sudo apt install -y kubectl
 
 # kops (2m)
 export VERSION=$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d'"' -f4)
@@ -168,6 +168,9 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/latest | grep tag_name | cut -d'"' -f4)
 curl -L https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv 
 sudo mv jx /usr/local/bin/jx
+
+# pip & jq
+sudo apt install -y python-pip jq
 
 # awscli
 pip install --upgrade --user awscli
