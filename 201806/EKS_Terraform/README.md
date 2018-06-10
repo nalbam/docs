@@ -101,7 +101,7 @@ kubectl apply -f .output/aws-auth.yml
 ## calico
 
 ```bash
-kubectl apply -f ./data/calico.yml
+kubectl apply -f https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/v1.0.0/config/v1.0/aws-k8s-cni-calico.yaml
 ```
 
 * https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/calico.html
@@ -111,7 +111,11 @@ kubectl apply -f ./data/calico.yml
 ## sample
 
 ```bash
-kubectl apply -f ./data/sample-web.yml
+# apply
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
+
+# delete
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
 ```
 
 ---
@@ -121,3 +125,15 @@ kubectl apply -f ./data/sample-web.yml
 ```bash
 kubectl get no,deploy,pod,svc --all-namespaces
 ```
+
+---
+
+## Thank You
+
+---
+
+## We are hiring...
+
+> ![](images/interest.png)
+
+* jungyoul.yu@bespinglobal.com

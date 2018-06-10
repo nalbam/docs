@@ -307,7 +307,7 @@ Note:
 
 ### sample
 ```bash
-# install
+# apply
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
 
 # delete
