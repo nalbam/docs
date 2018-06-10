@@ -131,6 +131,7 @@ Note:
 ### OSX (5m)
 ```bash
 brew tap jenkins-x/jx
+
 brew install awscli kubectl kops jx jq
 ```
 * https://brew.sh/index_ko
