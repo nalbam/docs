@@ -1,23 +1,31 @@
 # Terraform EKS
 
----
-
-## EKS
-
-* Elastic Container Service for Kubernetes
-* Kubernetes 제어 플레인을 설치하고 운영할 필요 없이 AWS에서 Kubernetes를 손쉽게 실행하도록 하는 관리형 서비스입니다.
+#### Elastic Container Service for Kubernetes
 
 ---
 
 ## Kubernetes
 
-* 컨테이너화된 애플리케이션의 배포, 조정 및 관리 자동화를 위한 오픈 소스 시스템
+- 컨테이너 작업을 자동화하는 오픈소스 플랫폼
+- Cluster 는 Master 와 Node 로 구성 
+
+> <img src="images/kubernetes.png" height="300">
+
+---
+
+## EKS
+
+- Master Node 관리를 AWS 에서
+- 우리는 Worker Node 만 관리
+
+> ![](images/what-is-eks.png)
 
 ---
 
 ## Terraform
 
 * 인프라를 코드로 관리하고, 이를 배포/관리 할수 있는 오픈 소스 도구
+* Infrastructure as Code
 
 ---
 
@@ -63,7 +71,7 @@ chmod +x ./heptio-authenticator-aws && sudo mv ./heptio-authenticator-aws /usr/l
 
 ---
 
-## Terraform
+## terraform apply
 
 ```bash
 terraform init
@@ -74,6 +82,8 @@ terraform apply
 
 terraform destroy
 ```
+
+* https://github.com/nalbam/terraform-aws-eks
 
 ---
 
