@@ -332,7 +332,7 @@ Note:
 Kubernetes Dashboard is a general purpose, web-based UI for Kubernetes clusters.
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/dashboard.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
 
 # get dashboard token
 kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | grep kubernetes-dashboard-token | awk '{print $1}')
@@ -342,7 +342,7 @@ kubectl create clusterrolebinding cluster-admin:kube-system:kubernetes-dashboard
 kubectl get clusterrolebindings | grep cluster-admin
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/dashboard.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
 ```
 * https://github.com/kubernetes/dashboard/
 
@@ -357,14 +357,14 @@ Note:
 Heapster enables Container Cluster Monitoring and Performance Analysis for Kubernetes - DEPRECATED
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/heapster.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
 
 # monitoring
 kubectl top pod --all-namespaces
 kubectl top pod -n kube-system
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/template/heapster.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
 ```
 * https://github.com/kubernetes/heapster/
 
