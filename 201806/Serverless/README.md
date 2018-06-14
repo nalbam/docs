@@ -189,8 +189,8 @@ Note:
 GitHub > Circle CI > AWS Console (Lambda, API G/W, S3, SNS, Route53)
 * https://github.com/nalbam/terraform-serverless/blob/master/main.tf
 * https://circleci.com/gh/nalbam/terraform-serverless
-* https://demo-api.saymoji.com/demos/3
-* https://demo-static.saymoji.com/
+* https://demo-api-dev.saymoji.com/demos/3
+* https://demo-web.saymoji.com/
 
 ---
 
