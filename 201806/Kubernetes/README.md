@@ -314,10 +314,10 @@ Note:
 ### Sample
 ```bash
 # apply
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/sample-web.yml
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/sample-web.yml
 ```
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#LoadBalancers
 
