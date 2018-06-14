@@ -300,9 +300,9 @@ Note:
 kubectl config view
 
 # kubectl get
-kubectl get deploy,pod,svc,job --all-namespaces
-kubectl get deploy,pod,svc,job -n kube-system
-kubectl get deploy,pod,svc,job -n default
+kubectl get node,deploy,pod,svc --all-namespaces
+kubectl get node,deploy,pod,svc -n kube-system
+kubectl get node,deploy,pod,svc -n default
 ```
 
 Note:
@@ -337,7 +337,7 @@ Note:
 ### Dashboard
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/dashboard-v1.8.3.yml
 
 # get dashboard token
 kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | grep kubernetes-dashboard-token | awk '{print $1}')
@@ -347,7 +347,7 @@ kubectl create clusterrolebinding cluster-admin:kube-system:kubernetes-dashboard
 kubectl get clusterrolebindings | grep cluster-admin
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/dashboard-v1.8.3.yml
 ```
 * https://github.com/kubernetes/dashboard/
 
@@ -361,14 +361,14 @@ Note:
 ### Heapster
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/heapster-v1.7.0.yml
 
 # monitoring
 kubectl top pod --all-namespaces
 kubectl top pod -n kube-system
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/heapster-v1.7.0.yml
 ```
 * https://github.com/kubernetes/heapster/
 
@@ -391,23 +391,37 @@ jx install --provider=aws
 
 jx console
 
-jx get applications
-jx get pipelines
-
 jx get activity -f jx-demo -w
 jx get build logs nalbam/jx-demo/master
 jx get build logs nalbam/jx-demo/dev
 
-jx promote jx-demo --env production
 ```
 * https://jenkins-x.io/
+
+Note:
+- ELB 의 도메인을 사용하겠냐는 질문에 `Y` 를 입력 합니다.
+- ELB 의 IP 를 이용한 nio.io 에 `엔터` 를 입력 합니다.
+- Github user name 에 본인의 계정을 입력합니다.
+- API Token 입력을 위하여 제시된 주소로 갑니다. 토큰을 만들어서 붙여 넣습니다.
+- `이때 토큰문자열 앞의 공백에 주의해서 붙여 넣어 주세요.`
+- Jenkins 를 생성하고, Jenkins 주소가 나타날 것입니다.
+- 아이디 `admin` 과 제시된 비밀번호를 입력해 주세요.
+- Show API Token 버튼을 클릭하여 키를 붙여 넣습니다.
+- `stageing` 과 `production` 관리 repo 를 저장할 계정을 선택 합니다.
 
 ---
 
 ### Create Project
 ```bash
 jx create spring -d web -d actuator
+
+jx get applications
+jx get pipelines
 ```
+
+Note:
+- Spring Boot 프로젝트를 생성합니다.
+- Github 에 프로젝트가 생성됩니다.
 
 ---
 
@@ -423,15 +437,26 @@ jx create spring -d web -d actuator
 
 ---
 
+### Production
+```bash
+jx promote jx-demo --env production
+```
+
+---
+
 ## Clean Up
 ```bash
-kops validate cluster --name=${KOPS_CLUSTER_NAME}
+jx uninstall
+rm -rf ~/.jx
+
+kops delete cluster --name=${KOPS_CLUSTER_NAME} --yes
 ```
 
 Note:
 - 지금까지 만들었던 클러스터를 지웁니다.
 - 접속용으로 만들었던 인스턴스를 지웁니다.
-- Access Key 도 지웁니다.
+- Access Key 를 지웁니다.
+- Github 토큰을 지웁니다. https://github.com/settings/tokens
 
 ---
 
