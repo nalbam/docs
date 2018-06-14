@@ -81,8 +81,8 @@ Note:
 ---
 
 ### AWS IAM - Access keys
-```bash
-hands-on
+```
+awskrug
 ```
 * https://console.aws.amazon.com/iam/home?region=ap-northeast-2#/users
 
@@ -93,8 +93,8 @@ Note:
 ---
 
 ### AWS EC2 - Key Pairs
-```bash
-hands-on
+```
+awskrug
 ```
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#KeyPairs
 
@@ -105,8 +105,8 @@ Note:
 ---
 
 ### AWS EC2 - Instance
-```bash
-
+```
+Amazon Linux AMI
 ```
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Instances
 
@@ -160,6 +160,7 @@ export VERSION=$(curl -s https://api.github.com/repos/kubernetes/kops/releases/l
 curl -LO https://github.com/kubernetes/kops/releases/download/${VERSION}/kops-linux-amd64
 chmod +x kops-linux-amd64 && sudo mv kops-linux-amd64 /usr/local/bin/kops
 ```
+* https://github.com/kubernetes/kops
 
 ---
 
@@ -169,6 +170,7 @@ export VERSION=$(curl -s https://api.github.com/repos/kubernetes/helm/releases/l
 curl -L https://storage.googleapis.com/kubernetes-helm/helm-${VERSION}-linux-amd64.tar.gz | tar xzv
 sudo mv linux-amd64/helm /usr/local/bin/helm
 ```
+* https://github.com/kubernetes/helm
 
 ---
 
@@ -178,6 +180,7 @@ export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/late
 curl -L https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv 
 sudo mv jx /usr/local/bin/jx
 ```
+* https://github.com/jenkins-x/jx
 
 ---
 
@@ -195,31 +198,31 @@ cat <<EOF > ~/.aws/credentials
 aws_access_key_id=
 aws_secret_access_key=
 EOF
-
-# aws ec2 list
-aws ec2 describe-instances | jq '.Reservations[].Instances[] | select(.State.Name == "running") | {Id: .InstanceId, Ip: .PublicIpAddress, Type: .InstanceType}'
-
-# aws elb list
-aws elb describe-load-balancers | jq '.LoadBalancerDescriptions[] | {DNSName: .DNSName, Count: .Instances | length}'
 ```
 
 Note:
 - ssh 키를 생성합니다. 클러스터 내에서 서로 접속 하기 위하여 필요 합니다.
 - aws cli 를 사용하여 리전을 서울로 설정 합니다.
 - 그리고 위에서 발급된 access key 를 넣어줍니다.
-- 아래 두개의 쉘은 Instance 목록과 ELB 목록을 조회 하여 필요한 정보만 보여줍니다.
 
 ---
 
-## Kubernetes Cluster
+## Cluster Name
 ```bash
 export KOPS_CLUSTER_NAME=awskrug.k8s.local
 export KOPS_STATE_STORE=s3://terraform-awskrug-nalbam-seoul
 
 # aws s3 bucket for state store
 aws s3 mb ${KOPS_STATE_STORE} --region ap-northeast-2
+```
 
-# create cluster
+Note:
+- 클러스터 이름을 세팅하고, 클러스터 상태를 저장할 S3 Bucket 을 만들어 줍니다.
+
+---
+
+## Cluster Create
+```bash
 kops create cluster \
     --cloud=aws \
     --name=${KOPS_CLUSTER_NAME} \
@@ -233,16 +236,13 @@ kops create cluster \
 ```
 
 Note:
-- 클러스터 이름을 세팅하고, 클러스터 상태를 저장할 S3 Bucket 을 만들어 줍니다.
 - 마스터 1대, 노드 2대로 구성된 클러스터를 생성합니다.
 - 위 명령을 실행하면 실제 클러스터는 만들어지지 않습니다.
 
 ---
 
-## Cluster
+## Cluster Edit
 ```bash
-export KOPS_CLUSTER_NAME=awskrug.k8s.local
-
 kops get cluster --name=${KOPS_CLUSTER_NAME}
 
 kops edit cluster --name=${KOPS_CLUSTER_NAME}
@@ -267,21 +267,24 @@ Note:
 
 ---
 
-## Create Cluster
+## Cluster Update
 ```bash
-export KOPS_CLUSTER_NAME=awskrug.k8s.local
-
 kops update cluster --name=${KOPS_CLUSTER_NAME} --yes
-
-kops validate cluster --name=${KOPS_CLUSTER_NAME}
-
-kops delete cluster --name=${KOPS_CLUSTER_NAME} --yes
 ```
 
 Note:
-- update 명력에 --yes 를 하면 실제 클러스터가 생성 됩니다.
-- validate 로 생성이 완료 되었는지 확인 할수 있습니다.
-- 클러스터 생성까지 대략 10여분이 소요 됩니다.
+- update 명령에 --yes 를 하면 실제 클러스터가 생성 됩니다.
+- 클러스터 생성까지 10여분이 소요 됩니다.
+
+---
+
+## Cluster Validate
+```bash
+kops validate cluster --name=${KOPS_CLUSTER_NAME}
+```
+
+Note:
+- validate 명령으로 생성이 완료 되었는지 확인 할수 있습니다.
 
 ---
 
@@ -298,7 +301,7 @@ kubectl get deploy,pod,svc,job -n default
 
 Note:
 - 클러스터 정보와 만들어진 객체들을 조회 할수 있습니다.
-- -w 옵션으로 2초마다 리로드 하도록 할수 있습니다.
+- 모든 네임스페이스 혹은 지정한 네임스페이스 객체를 조회 할수 있습니다.
 
 ---
 
@@ -326,7 +329,6 @@ Note:
 ---
 
 ### Dashboard
-Kubernetes Dashboard is a general purpose, web-based UI for Kubernetes clusters.
 ```bash
 # install
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
@@ -351,7 +353,6 @@ Note:
 ---
 
 ### Heapster
-Heapster enables Container Cluster Monitoring and Performance Analysis for Kubernetes - DEPRECATED
 ```bash
 # install
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
