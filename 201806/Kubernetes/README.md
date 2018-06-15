@@ -176,7 +176,7 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 
 ---
 
-### jenkins-x - 1m
+### jenkins-x
 ```bash
 export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/latest | grep tag_name | cut -d'"' -f4)
 curl -L https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv 
