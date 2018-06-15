@@ -100,7 +100,7 @@ Note:
 * 좌측 메뉴에서 `Instances` 를 선택합니다.
 * 방금 만들었던 인스턴스를 선택 합니다.
 * `IPv4 Public IP` 에 생성된 `IP` 를 확인 합니다.
-* Terminal 을 통하여 접속 할수 있습니다.
+* Terminal 로 인스턴스에 접속 할수 있습니다.
   * `PEM_PATH` 를 다운받은 `awskrug.pem` 파일 경로로 변경 합니다.
   * `PUBLIC_IP` 를 위에서 확인한 `IP` 로 변경하여 접속 합니다.
 
