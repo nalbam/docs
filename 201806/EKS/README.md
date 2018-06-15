@@ -15,7 +15,8 @@
 
 ## EKS
 
-* Master Node 관리를 AWS 에서
+* AWS 의 Kubernetes 관리형 서비스
+* AWS 에서 Master Node 관리 
 * 우리는 Worker Node 만 관리
 
 > <img src="images/what-is-eks.png" height="300">
@@ -26,6 +27,7 @@
 
 * 인프라를 코드로 관리하고, 이를 배포/관리 할수 있는 오픈 소스 도구
 * Infrastructure as Code
+* https://www.terraform.io/
 
 ---
 
@@ -34,7 +36,11 @@
 * version > 1.15.32
 
 ```bash
-pip3 install awscli
+pip3 install awscli --upgrade --user
+
+# 또는
+
+pip install awscli --upgrade --user
 ```
 
 Note:
@@ -74,7 +80,12 @@ Note:
 ## heptio
 
 ```bash
+# mac
 curl -o heptio-authenticator-aws https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/darwin/amd64/heptio-authenticator-aws
+chmod +x ./heptio-authenticator-aws && sudo mv ./heptio-authenticator-aws /usr/local/bin/
+
+# linux
+curl -o heptio-authenticator-aws https://amazon-eks.s3-us-west-2.amazonaws.com/1.10.3/2018-06-05/bin/linux/amd64/heptio-authenticator-aws
 chmod +x ./heptio-authenticator-aws && sudo mv ./heptio-authenticator-aws /usr/local/bin/
 ```
 
