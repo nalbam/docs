@@ -122,7 +122,8 @@ Note:
 
 ```bash
 mkdir -p ~/.kube
-cat .output/kube-config.yml > ~/.kube/config
+cat .output/kube-config.yml > ~/.kube/config-demo
+export KUBECONFIG=$KUBECONFIG:~/.kube/config-demo
 ```
 
 * https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
