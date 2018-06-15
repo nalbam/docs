@@ -78,8 +78,8 @@ Note:
 * `IPv4 Public IP` 에 생성된 `IP` 를 확인 합니다.
 * PuTTYgen 으로 프라이빗 키를 변환 해야 합니다.
   * `PuTTYgen` 을 시작합니다.
-  * Type of key to generate 에서 `RSA` 를 선택합니다.
-  * Load 를 선택합니다. `.pem` 파일을 찾으려면 모든 유형의 파일을 표시하는 옵션을 선택합니다.
+  * `Type of key to generate` 에서 `RSA` 를 선택합니다.
+  * `Load` 를 선택합니다. `.pem` 파일을 찾으려면 모든 유형의 파일을 표시하는 옵션을 선택합니다.
   * `awskrug.pem` 을 선택합니다.
   * `Save private key` 버튼을 눌러 저장 합니다.
   * `awskrug.ppk` 가 만들어 졌습니다.
