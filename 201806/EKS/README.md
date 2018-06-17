@@ -118,11 +118,11 @@ Note:
 
 ---
 
-## kube-config
+## kube config
 
 ```bash
 mkdir -p ~/.kube
-cat .output/kube-config.yml > ~/.kube/config
+cat .output/kube_config.yml > ~/.kube/config
 ```
 
 * https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/create-kubeconfig.html
@@ -144,10 +144,10 @@ Note:
 
 ---
 
-## aws-auth
+## aws auth
 
 ```bash
-kubectl apply -f .output/aws-auth.yml
+kubectl apply -f .output/aws_auth.yml
 ```
 
 * https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/add-user-role.html
