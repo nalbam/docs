@@ -55,6 +55,11 @@ metadata:
   labels:
     app: sample-web
     dns: route53
+  annotations:
+    prometheus.io/scrape: true
+    prometheus.io/scheme: http
+    prometheus.io/path: /
+    prometheus.io/port: 80
 spec:
   type: LoadBalancer
   ports:
