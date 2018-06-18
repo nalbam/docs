@@ -42,7 +42,7 @@ spec:
     apiVersion: apps/v1beta1
   minReplicas: 1
   maxReplicas: 5
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
 
 ---
 # ------------------- Service ------------------- #
@@ -54,7 +54,11 @@ metadata:
   namespace: default
   labels:
     app: sample-web
-    dns: route53
+  annotations:
+    prometheus.io/scrape: true
+    prometheus.io/scheme: http
+    prometheus.io/path: /
+    prometheus.io/port: 80
 spec:
   type: LoadBalancer
   ports:
