@@ -143,7 +143,7 @@ aws_secret_access_key=
 
 ```bash
 export KOPS_CLUSTER_NAME=awskrug.k8s.local
-export KOPS_STATE_STORE=s3://terraform-awskrug-MY_UNIQUE_ID
+export KOPS_STATE_STORE=s3://kops-awskrug-MY_UNIQUE_ID
 
 aws s3 mb ${KOPS_STATE_STORE} --region ap-northeast-2
 ```
