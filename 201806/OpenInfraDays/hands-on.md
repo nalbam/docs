@@ -251,7 +251,7 @@ Your cluster awskrug.k8s.local is ready
 ```bash
 kubectl get node
 
-kubectl get deploy,pod,svc --all-namespaces
+kubectl get node,deploy,pod,svc --all-namespaces
 
 kubectl get deploy,pod,svc -n kube-system
 kubectl get deploy,pod,svc -n default
@@ -437,6 +437,10 @@ To create a new microservice from a quickstart: jx create quickstart
 * 이제 Jenkins X 설치가 완료 되었습니다.
 
 * `environment` 빌드가 완료 될때 까지 잠시 기다려 주세요.
+
+```bash
+jx get pipelines
+```
 
 ### Create Project
 
