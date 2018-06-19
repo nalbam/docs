@@ -41,9 +41,6 @@ spec:
     - name: http
       port: 80
       targetPort: 3000
-    - name: https
-      port: 443
-      targetPort: 3000
   selector:
     k8s-app: sample-node
 

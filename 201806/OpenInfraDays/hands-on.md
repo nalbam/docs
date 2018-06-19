@@ -452,18 +452,21 @@ jx create spring -d web -d actuator
 jx create quickstart
 ```
 ```
-? select the quickstart you wish to create node-http
-? Project name node-http
+? Language: java
+? Group: com.example
+? Artifact: demo
+? Do you wish to use nalbam as the git user name: Yes
+? Would you like to initialise git now? Yes
 
-Generated quickstart at /home/ec2-user/node-http
+Initialized empty Git repository in /home/ec2-user/demo/.git/
 ```
 ```
-Pushed git repository to https://github.com/nalbam/node-http
+Pushed git repository to https://github.com/nalbam/demo
 
-Created Jenkins Project: http://jenkins.jx.13.0.0.0.nip.io/job/nalbam/job/node-http/
+Created Jenkins Project: http://jenkins.jx.13.0.0.0.nip.io/job/nalbam/job/demo/
 
-Watch pipeline activity via:    jx get activity -f node-http -w
-Browse the pipeline log via:    jx get build logs nalbam/node-http/master
+Watch pipeline activity via:    jx get activity -f demo -w
+Browse the pipeline log via:    jx get build logs nalbam/demo/master
 Open the Jenkins console via    jx console
 You can list the pipelines via: jx get pipelines
 When the pipeline is complete:  jx get applications
@@ -473,7 +476,7 @@ When the pipeline is complete:  jx get applications
 * 로그를 보며 완료 되길 기다립니다.
 
 ```bash
-jx get activity -f node-http -w
+jx get activity -f demo -w
 ```
 
 Note:
@@ -482,37 +485,19 @@ Note:
 ### Pull Request
 
 * `dev` Branch 를 만들어 줍니다.
-
-```bash
-cd node-http
-
-git branch dev
-git checkout dev
-
-vi index.html
-
-git commit -a -m "awskrug"
-
-git push origin dev
-```
-
 * 약간의 소스를 수정 하고, `Pull Request` 를 보내봅니다.
 
 * `PR-1` 빌드가 시작 되었습니다.
 
 ```bash
-jx get activity -f node-http -w
-
-jx get pipelines
-
-jx get applications
+jx get activity -f demo -w
 ```
 
 * 빌드가 완료되면, Github Issues 에 이슈가 등록 되고,
 * `preview` 링크를 통하여 결과를 확인 할수 있습니다.
 
 Note:
-- https://github.com/nalbam/node-http/pull/1
+- https://github.com/nalbam/demo/pull/1
 
 ### PR Merge
 
@@ -525,7 +510,7 @@ Note:
 * `production` 환경에 배포하기 위해서는 다음의 명령을 하면 됩니다.
 
 ```bash
-jx promote node-http -v 0.0.1 -e production
+jx promote demo -v 0.0.1 -e production
 ```
 
 * Github user name 과 password 가 필요 합니다.
