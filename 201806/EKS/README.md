@@ -7,7 +7,7 @@
 ## Kubernetes
 
 * 컨테이너 작업을 자동화하는 오픈소스 플랫폼
-* Cluster 는 Master 와 Node 로 구성 
+* Cluster 는 Master 와 Nodes 로 구성 
 
 > <img src="images/kubernetes.png" height="300">
 
@@ -27,6 +27,7 @@
 
 * 인프라를 코드로 관리하고, 이를 배포/관리 할수 있는 오픈 소스 도구
 * Infrastructure as Code
+* Made by HashiCorp
 * https://www.terraform.io/
 
 ---
