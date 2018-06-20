@@ -136,7 +136,9 @@ Note:
 ## kubectl
 
 ```bash
-kubectl get no,deploy,pod,svc --all-namespaces
+kubectl get node
+
+kubectl get deploy,pod,svc --all-namespaces
 ```
 
 Note:
@@ -157,28 +159,17 @@ Note:
 
 ---
 
-## calico
-
-```bash
-kubectl apply -f https://raw.githubusercontent.com/aws/amazon-vpc-cni-k8s/v1.0.0/config/v1.0/aws-k8s-cni-calico.yaml
-```
-
-* https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/calico.html
-
-Note:
-- 네트웍 툴을 설치 합니다.
-- 여러가지 툴이 있지만, 아마존 공식 문서의 calico 를 설치 하도록 합니다.
-
----
-
 ## sample
 
 ```bash
 # apply
-kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
+kubectl apply -f data/sample-web.yml
+
+# elb endpoint
+kubectl get svc -o wide -n default
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-web.yml
+kubectl delete -f data/sample-web.yml
 ```
 
 Note:
