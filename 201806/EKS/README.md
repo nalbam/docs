@@ -103,11 +103,7 @@ Note:
 ```bash
 terraform init
 
-terraform plan
-
 terraform apply
-
-terraform destroy
 ```
 
 * https://github.com/nalbam/terraform-aws-eks
@@ -176,6 +172,19 @@ kubectl delete -f data/sample-web.yml
 Note:
 - 샘플 앱을 올려 봅니다.
 - ELB 에 Endpoint 가 생성 됨을 알수 있습니다.
+
+---
+
+## terraform destroy
+
+```bash
+terraform destroy
+```
+
+Note:
+- 하지만 정상적으로 지워지지 않을것 입니다.
+- ELB 는 terraform 에 의하여 만들어지지 않아 terraform 으로 지울수 없고.
+- ELB 가 VPC, Subnet 등을 물고 있기 때문 입니다.
 
 ---
 
