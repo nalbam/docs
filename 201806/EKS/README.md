@@ -2,7 +2,7 @@
 
 #### Elastic Container Service for Kubernetes
 
-_
+-
 
 ### 유정열 (nalbam)
 
