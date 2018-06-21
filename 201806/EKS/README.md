@@ -2,6 +2,10 @@
 
 #### Elastic Container Service for Kubernetes
 
+_
+
+### 유정열 (nalbam)
+
 ---
 
 ## Kubernetes
@@ -95,6 +99,14 @@ chmod +x ./heptio-authenticator-aws && sudo mv ./heptio-authenticator-aws /usr/l
 Note:
 - Kubernetes cluster 에 인증하기 위한 툴
 - 각 클라이언트 운영체제에 맞는 버전을 설치
+
+---
+
+## Bastion
+
+* 바로 시작하고 싶다면!
+
+* https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Images:visibility=public-images;imageId=ami-5e11bb30
 
 ---
 
