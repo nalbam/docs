@@ -1,6 +1,8 @@
-# Terraform EKS
+# EKS
 
 #### Elastic Container Service for Kubernetes
+
+## Terraform
 
 -
 
