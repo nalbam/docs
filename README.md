@@ -40,6 +40,7 @@ None - Fade - Slide - Convex - Concave - Zoom
 ### Fragments
 
 ... wow ... <!-- .element: class="fragment" -->
+
 ... wow ... <!-- .element: class="fragment" -->
 
 <!--v-->
