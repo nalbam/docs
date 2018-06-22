@@ -4,7 +4,7 @@
 
 ## reveal-md
 ```bash
-npm install -g reveal-md
+sudo npm install -g reveal-md
 ```
 * https://github.com/webpro/reveal-md
 
