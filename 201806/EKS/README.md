@@ -125,7 +125,7 @@ terraform apply
 
 Note:
 - 테라폼 소스를 살펴 보도록 합니다.
-- 그리고 apply.
+- 소스를 다운받고, terraform apply.
 - VPC, Subnet, SG, EKS, ASG, Instance 들이 만들어 집니다.
 
 ---
