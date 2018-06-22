@@ -14,3 +14,19 @@ sudo npm install -g reveal-md
 ```bash
 reveal-md README.md
 ```
+
+---
+
+demo
+
+----
+
+demo 1
+
+----
+
+demo 2
+
+---
+
+end
