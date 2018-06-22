@@ -314,10 +314,10 @@ Note:
 ### Sample
 ```bash
 # apply
-kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/sample-web.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-node.yml
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/sample-web.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-node.yml
 ```
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#LoadBalancers
 
@@ -337,17 +337,21 @@ Note:
 ### Dashboard
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/dashboard-v1.8.3.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
+
+# create service account
+kubectl create serviceaccount admin -n kube-system
+
+# create cluster role binding
+kubectl create clusterrolebinding cluster-admin:kube-system:admin \
+        --clusterrole=cluster-admin \
+        --serviceaccount=kube-system:admin
 
 # get dashboard token
-kubectl describe secret -n kube-system $(kubectl get secret -n kube-system | grep kubernetes-dashboard-token | awk '{print $1}')
-
-# create role binding for kube-system:kubernetes-dashboard
-kubectl create clusterrolebinding cluster-admin:kube-system:kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
-kubectl get clusterrolebindings | grep cluster-admin
+kubectl describe secret $(kubectl get secret -n kube-system | grep admin-token | awk '{print $1}') -n kube-system
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/dashboard-v1.8.3.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
 ```
 * https://github.com/kubernetes/dashboard/
 
@@ -361,14 +365,14 @@ Note:
 ### Heapster
 ```bash
 # install
-kubectl apply -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/heapster-v1.7.0.yml
+kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
 
 # monitoring
 kubectl top pod --all-namespaces
 kubectl top pod -n kube-system
 
 # delete
-kubectl delete -f https://raw.githubusercontent.com/nalbam/docs/master/201806/Kubernetes/sample/heapster-v1.7.0.yml
+kubectl delete -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
 ```
 * https://github.com/kubernetes/heapster/
 
