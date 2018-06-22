@@ -107,6 +107,7 @@ Note:
 ## Bastion
 
 * 바로 시작하고 싶다면!
+* 이 AMI 에 모든 tool 을 설치 해놨습니다.
 
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Images:visibility=public-images;imageId=ami-5e11bb30
 
@@ -125,7 +126,7 @@ terraform apply
 Note:
 - 테라폼 소스를 살펴 보도록 합니다.
 - 그리고 apply.
-- VPC, Subnet, SG, EKS, ASG, Instance
+- VPC, Subnet, SG, EKS, ASG, Instance 들이 만들어 집니다.
 
 ---
 
@@ -154,6 +155,7 @@ kubectl get deploy,pod,svc --all-namespaces
 
 Note:
 - 모든 Namespace 에 어떤 Pod 가 올라와 있는지 확인해 봅니다.
+- 하지만, Node 가 없네요.
 
 ---
 
@@ -185,7 +187,7 @@ kubectl delete -f data/sample-web.yml
 
 Note:
 - 샘플 앱을 올려 봅니다.
-- ELB 에 Endpoint 가 생성 됨을 알수 있습니다.
+- ELB 에 Endpoint 가 생성됨을 알수 있습니다.
 
 ---
 
