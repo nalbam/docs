@@ -104,12 +104,35 @@ Note:
 
 ---
 
-## Bastion
+## bastion
 
 * 바로 시작하고 싶다면!
 * 이 AMI 에 모든 tool 을 설치 해놨습니다.
 
 * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Images:visibility=public-images;imageId=ami-5e11bb30
+
+---
+
+## terraform config
+
+* 소스를 다운 받고, 설정을 수정합니다. `10-aws.tf`
+
+```bash
+git clone https://github.com/nalbam/terraform-aws-eks
+```
+
+```hcl-terraform
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key = "eks.tfstate"
+  }
+}
+```
+
+Note:
+* Terraform 에서 생성한 리소스를 저장/관히하기 위한 S3 Bucket 입니다.
 
 ---
 
@@ -120,8 +143,6 @@ terraform init
 
 terraform apply
 ```
-
-* https://github.com/nalbam/terraform-aws-eks
 
 Note:
 - 테라폼 소스를 살펴 보도록 합니다.
