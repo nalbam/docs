@@ -10,15 +10,18 @@ revealOptions:
 <!--s-->
 
 ## reveal-md
-```bash
+
+```
 sudo npm install -g reveal-md
 ```
-* https://github.com/webpro/reveal-md
+
+https://github.com/webpro/reveal-md
 
 <!--s-->
 
 ## example
-```bash
+
+```
 reveal-md README.md
 ```
 
@@ -36,7 +39,8 @@ None - Fade - Slide - Convex - Concave - Zoom
 
 ### Fragments
 
-<p class="fragment">... wow ...</p>
+... wow ... <!-- .element: class="fragment" -->
+... wow ... <!-- .element: class="fragment" -->
 
 <!--v-->
 
