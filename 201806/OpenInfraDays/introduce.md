@@ -41,7 +41,7 @@ Note:
 - 가장 기본적인 구성인 한개의 마스터와 두개의 노드로 구성된 클러스터 입니다.
 - `Master` 에서 API Server 를 통하여 정보를 제공하고.
 - Controller 와 Scheduler 로 Node 의 객체를 관리합니다.
-- `Node` 에는 한 개 이상의 컨테이너가 Pod 로 감싸져 배포 되고.
+- `Node` 에는 한 개 이상의 Container 가 Pod 로 감싸져 배포 되고.
 - Service 를 통하여 Pod 를 Discovery 하고 Load Balancing 을 합니다.
 - Kube-proxy 및 Ingress 설정에 따라 외부로 서비스 될 수 있습니다.
 - ConfigMap, Secret, Account, Role 등도 지원 합니다.
@@ -112,14 +112,14 @@ Note:
 ![](images/jenkins-x.png)
 
 Note:
-- Jenkins X 의 파이프라인을 간략화한 그립입니다. 보기엔 복잡해 보이지만 알고보면 어렵지 않습니다.
-- 어떤 서비스를 생성 하여 깃에 올리고, 수정하여 Pull Request 를 보내게 되면
-- Jenkins X 는 Webhook 을 받아 빌드하여 임시 버전을 Preview 환경에 배포합니다.
-- 개발자 혹은 테스터가 PR 의 Comment 에 등록된 주소를 통하여 확인 후, Merge 를 하면
-- 다시 빌드 하여 정식 할당된 버전을 Staging 환경에 배포 합니다.
-- 이때 이미지는 내장된 Registry 로, 버전 관리는 Helm 을 사용하여 관리합니다. 
-- 테스터는 Staging 환경에 배포된 서비스를 테스트하고 이상이 없으면
-- Production 환경에 배포 합니다.
+- Jenkins X 의 파이프라인을 간략화한 그림입니다.
+- 어떤 서비스를 생성 하여 `Git Repository` 에 올리고, 수정하여 `Pull Request` 를 보내게 되면
+- Jenkins X 는 Webhook 을 받아 Build 하여 임시 버전을 `Preview` 환경에 배포합니다.
+- 테스터가 PR 의 Comment 에 등록된 주소를 통하여 테스트 합니다.
+- 이상이 없으면 `Merge` 를 하고, Build 하여 버전을 할당하고, 해당 버전을 `Staging` 환경에 배포 합니다.
+- 이때 이미지는 내장된 Registry 로, 버전 관리는 Helm 을 사용하여 관리합니다.
+- 테스터는 Staging 환경에 배포된 서비스를 테스트하고
+- 이상이 없으면 `Production` 환경에 배포 합니다.
 
 <!--v-->
 
