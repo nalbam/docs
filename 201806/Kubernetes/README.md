@@ -35,34 +35,44 @@
 ---
 
 ### Kubernetes
+
 * 컨테이너 작업을 자동화하는 오픈소스 플랫폼
 * Container Orchestration
 * Cluster 는 Master 와 Node 로 구성 
 
-<img src="images/kubernetes.png" height="300">
+---
+
+![](images/kubernetes.png)
 
 ---
 
 ### Kops
+
 * Kubernetes cluster up and running
 * AWS is officially supported
 * GCE is beta supported
 * 1 Master, 2 Nodes
 
-<img src="images/kops.png" height="300">
+---
+
+![](images/kubernetes-eks.png)
 
 ---
 
 ### Jenkins X
+
 * Jenkins Pipeline Tool
 * Jenkins + Kubernetes Plugins + CLI
 * Jenkins 를 제외한 UI 는 제공되지 않음
 
-<img src="images/jenkins-x.png" height="300">
+---
+
+![](images/jenkins-x.png)
 
 ---
 
 ### Helm
+
 * Kubernetes Package Manager
 * Used in Jenkins X
 
@@ -81,6 +91,7 @@ Note:
 ---
 
 ### AWS IAM - Access keys
+
 ```
 User name: awskrug
 Access type: Programmatic access
@@ -94,6 +105,7 @@ Note:
 ---
 
 ### AWS EC2 - Key Pairs
+
 ```
 awskrug
 ```
@@ -108,6 +120,7 @@ Note:
 ---
 
 ### AWS EC2 - Instance
+
 ```
 Amazon Linux AMI
 ```
@@ -120,6 +133,7 @@ Note:
 ---
 
 ### Instance - 기본 설정
+
 ```bash
 # update
 sudo yum update -y
@@ -139,6 +153,7 @@ Note:
 ---
 
 ### kubectl
+
 ```bash
 cat <<EOF > kubernetes.repo
 [kubernetes]
@@ -157,6 +172,7 @@ sudo yum install -y kubectl
 ---
 
 ### kops
+
 ```bash
 export VERSION=$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d'"' -f4)
 curl -sLO https://github.com/kubernetes/kops/releases/download/${VERSION}/kops-linux-amd64
@@ -167,6 +183,7 @@ chmod +x kops-linux-amd64 && sudo mv kops-linux-amd64 /usr/local/bin/kops
 ---
 
 ### helm
+
 ```bash
 export VERSION=$(curl -s https://api.github.com/repos/kubernetes/helm/releases/latest | grep tag_name | cut -d'"' -f4)
 curl -sL https://storage.googleapis.com/kubernetes-helm/helm-${VERSION}-linux-amd64.tar.gz | tar xzv
@@ -176,7 +193,8 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 
 ---
 
-### jenkins-x - 1m
+### jenkins-x
+
 ```bash
 export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/latest | grep tag_name | cut -d'"' -f4)
 curl -sL https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv 
@@ -187,6 +205,7 @@ sudo mv jx /usr/local/bin/jx
 ---
 
 ### Access Keys
+
 ```bash
 # ssh key
 ssh-keygen -q -f ~/.ssh/id_rsa -N ''
@@ -210,6 +229,7 @@ Note:
 ---
 
 ## Cluster
+
 ```bash
 export KOPS_CLUSTER_NAME=awskrug.k8s.local
 export KOPS_STATE_STORE=s3://terraform-awskrug-nalbam-seoul
@@ -225,6 +245,7 @@ Note:
 ---
 
 ## Create Cluster
+
 ```bash
 kops create cluster \
     --cloud=aws \
@@ -245,6 +266,7 @@ Note:
 ---
 
 ## Edit Cluster
+
 ```bash
 kops edit cluster --name=${KOPS_CLUSTER_NAME}
 ```
@@ -256,6 +278,7 @@ Note:
 ---
 
 ### Modify for Jenkins-x
+
 ```yaml
 spec:
   docker:
@@ -269,6 +292,7 @@ Note:
 ---
 
 ## Update Cluster
+
 ```bash
 kops update cluster --name=${KOPS_CLUSTER_NAME} --yes
 ```
@@ -285,6 +309,7 @@ Note:
 ---
 
 ## Validate Cluster
+
 ```bash
 kops validate cluster --name=${KOPS_CLUSTER_NAME}
 ```
@@ -295,6 +320,7 @@ Note:
 ---
 
 ### kubectl
+
 ```bash
 # kubectl config
 kubectl config view
@@ -312,6 +338,7 @@ Note:
 ---
 
 ### Sample
+
 ```bash
 # apply
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-node.yml
@@ -335,6 +362,7 @@ Note:
 ---
 
 ### Dashboard
+
 ```bash
 # install
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
@@ -363,6 +391,7 @@ Note:
 ---
 
 ### Heapster
+
 ```bash
 # install
 kubectl apply -f https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
@@ -390,6 +419,7 @@ Note:
 ---
 
 ### Jenkins X
+
 ```bash
 jx install --provider=aws
 
@@ -416,6 +446,7 @@ Note:
 ---
 
 ### Create Project
+
 ```bash
 jx create spring -d web -d actuator
 
@@ -442,6 +473,7 @@ Note:
 ---
 
 ### Production
+
 ```bash
 jx promote jx-demo --env production
 ```
@@ -449,6 +481,7 @@ jx promote jx-demo --env production
 ---
 
 ## Clean Up
+
 ```bash
 jx uninstall
 rm -rf ~/.jx
