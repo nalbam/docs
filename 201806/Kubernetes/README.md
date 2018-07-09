@@ -198,16 +198,16 @@ aws s3 mb ${KOPS_STATE_STORE} --region ap-northeast-2
 ![](images/bastion-04.png)
 
 * Cloud 는 AWS 를 사용 하겠습니다.
-* Master Node 는 `m4.large` 1대로 하겠습니다. (cpu 2 / mem 8)
-* Worker Node 는 `m4.large` 2대로 하겠습니다. (cpu 2 / mem 8)
+* Master Node 는 `c4.large` 1대로 하겠습니다.
+* Worker Node 는 `t2.medium` 2대로 하겠습니다.
 
 ```bash
 kops create cluster \
     --cloud=aws \
     --name=${KOPS_CLUSTER_NAME} \
     --state=${KOPS_STATE_STORE} \
-    --master-size=m4.large \
-    --node-size=m4.large \
+    --master-size=c4.large \
+    --node-size=t2.medium \
     --node-count=2 \
     --zones=ap-northeast-2a,ap-northeast-2c \
     --network-cidr=10.10.0.0/16 \
@@ -230,7 +230,7 @@ Note:
 - 저는 Jenkins X 시연을 위하여 m4.xlarge 를 선택 하였습니다.
 - https://aws.amazon.com/ko/ec2/pricing/on-demand/
 
-### Update Cluster
+### Edit Cluster
 
 * 클러스터를 생성하기 전, 클러스터를 수정 할수 있습니다.
 
@@ -239,9 +239,19 @@ kops get cluster
 
 # edit cluster
 kops edit cluster
+```
 
-# edit instance group
+* Cluster Autoscalier 에서 node 를 늘려 줄 수 있도록 `node maxSize` 를 변경 합니다.
+
+```bash
 kops edit ig nodes
+```
+```
+spec:
+  image: kope.io/k8s-1.9-debian-jessie-amd64-hvm-ebs-2018-03-11
+  machineType: t2.medium
+  maxSize: 10
+  minSize: 2
 ```
 
 ### Create Cluster
@@ -276,8 +286,8 @@ Validating cluster awskrug.k8s.local
 
 INSTANCE GROUPS
 NAME                   ROLE   MACHINETYPE MIN MAX SUBNETS
-master-ap-northeast-2a Master m4.large    1   1   ap-northeast-2a
-nodes                  Node   m4.large    2   2   ap-northeast-2a,ap-northeast-2c
+master-ap-northeast-2a Master c4.large    1   1   ap-northeast-2a
+nodes                  Node   t2.medium   2   2   ap-northeast-2a,ap-northeast-2c
 
 NODE STATUS
 NAME                                           ROLE   READY
@@ -312,7 +322,7 @@ Note:
 * Ingress Controller 로 도메인을 내부 서비스로 연결해 줍니다.
 
 ```bash
-wget https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/ingress-nginx-v1.6.0.yml
+curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/ingress-nginx-v1.6.0.yml
 
 kubectl apply -f ingress-nginx-v1.6.0.yml
 ```
@@ -337,21 +347,16 @@ deployment.extensions/ingress-nginx created
 kubectl get svc -o wide -n kube-ingress
 
 # ELB 도메인으로 ip 를 획득 합니다.
-dig +short $(kubectl get svc -o wide -n kube-ingress | grep ingress-nginx | awk '{print $4}')
+dig +short $(kubectl get svc -o wide -n kube-ingress | grep ingress-nginx | awk '{print $4}' | head -n 1)
 ```
-
-Note:
-- 두개의 IP 가 나올것입니다.
-- 하나만 골라 기억해 둡니다.
 
 ### Sample Application
 
-* 샘플 어플리케이션을 생성해 봅니다.
-* 우선 yaml 파일을 다운 받아 vi 로 편집 합니다.
+* 샘플 어플리케이션 yaml 파일을 다운 받아 vi 로 편집 합니다.
 * 파일 하단의 nalbam.com 부분을 위의 ELB IP 를 넣어 `0.0.0.0.nip.io` 로 바꿔줍니다. 
 
 ```bash
-wget https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-spring-ing.yml
+curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-spring-ing.yml
 
 vi sample-spring-ing.yml
 ```
@@ -366,6 +371,8 @@ spec:
           serviceName: sample-spring
           servicePort: 80
 ```
+
+* 샘플 어플리케이션을 생성해 봅니다.
 
 ```bash
 kubectl apply -f sample-spring-ing.yml
@@ -396,26 +403,10 @@ sample-spring   sample-spring.apps.0.0.0.0.nip.io   a2aed74f77e8b-129875.ap-nort
 ### Dashboard
 
 * 웹 UI 를 통하여 정보와 상태를 볼수 있도록 Dashboard 를 올려 보겠습니다.
-* Dashboard 도 Ingress 설정으로 도메인을 부여 하겠습니다.
 
 ```bash
-wget https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3-ing.yml
+curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
 
-vi dashboard-v1.8.3-ing.yml
-```
-```yaml
-spec:
-  rules:
-  - host: kubernetes-dashboard.apps.0.0.0.0.nip.io
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: kubernetes-dashboard
-          servicePort: 80
-```
-
-```bash
 kubectl apply -f dashboard-v1.8.3-ing.yml
 ```
 ```
@@ -425,7 +416,6 @@ role.rbac.authorization.k8s.io "kubernetes-dashboard-minimal" created
 rolebinding.rbac.authorization.k8s.io "kubernetes-dashboard-minimal" created
 deployment.apps "kubernetes-dashboard" created
 service "kubernetes-dashboard" created
-ingress.extensions/kubernetes-dashboard created
 ```
 
 * dashboard 에 접속 하기 위해 `ServiceAccount` 와 `Role` 이 필요 합니다.
@@ -463,7 +453,7 @@ Note:
 * 힙스터를 설치하고 잠시 기다리면 정보가 수집되고, 대시보드에 보여집니다.
 
 ```bash
-wget https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
+curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/heapster-v1.7.0.yml
 
 kubectl apply -f heapster-v1.7.0.yml
 ```
@@ -476,7 +466,7 @@ role.rbac.authorization.k8s.io "system:pod-nanny" created
 rolebinding.rbac.authorization.k8s.io "heapster-binding" created
 ```
 
-* 잠시후 Heapster 가 정보를 수집하면 Dashboard 에 관련 정보를 추가로 볼수 있습니다.
+* 잠시 후 Heapster 가 정보를 수집하면 Dashboard 에 관련 정보를 추가로 볼 수 있습니다.
 * 또한, CLI 로도 조회가 가능 합니다.
 
 ```bash
@@ -491,7 +481,7 @@ Note:
 - 모니터링을 위해 `metrics-server` 또는 `Prometheus` 를 고려해 보시기 바랍니다.
 - https://github.com/kubernetes/heapster/
 
-### Autoscaler
+### Pod Autoscaler
 
 * 사용량이 늘어남에 따라 pod 를 늘어나고, 사용량이 줄어듦에 따라 pod 가 줄어드는 매직을 부려 봅니다.
 * 이미 `sample-spring` 에는 `HorizontalPodAutoscaler` 가 선언 되어있습니다.
@@ -499,22 +489,155 @@ Note:
 
 ```bash
 git clone https://github.com/kubernetes-incubator/metrics-server
+
 kubectl apply -f metrics-server/deploy/1.8+/
 ```
 
-* `Deployment` 의 `replicas: 2` 인데, pod 를 조회 해보면. 1개로 줄어들어 있습니다.
+* `Deployment` 의 `replicas: 2` 인데, pod 를 조회 해보면. `1` 로 줄어들어 있습니다.
 * `HorizontalPodAutoscaler` 설정에 따라 사용량이 없어서 `1` 로 줄였기 때문 입니다.
+
+```bash
+kubectl get hpa
+```
+```
+NAME            REFERENCE                  TARGETS   MINPODS   MAXPODS   REPLICAS
+sample-spring   Deployment/sample-spring   0%/50%    1         100       1
+```
+
+* 아파치 (httpd) 를 설치하면 ab (apache benchmark) 가 설치 됩니다.
+
+* 동시 `1`개 (concurrency, -c) 에서 `1,000,000`개 (requests, -n) 의 요청을 보내 봅시다.
+  * 이 명령은 새창으로 해봅시다.
+
+```bash
+ab -n 1000000 -c 1 http://sample-spring.apps.0.0.0.0.nip.io/stress
+```
+
+* pod 가 늘어나면서, `TARGETS` 을 `50%` 이하로 맞추려고 노력 할 것 입니다.
 
 ```bash
 kubectl get hpa -w
 ```
+```
+NAME            REFERENCE                  TARGETS   MINPODS   MAXPODS   REPLICAS
+sample-spring   Deployment/sample-spring   0%/50%    1         100       1
+sample-spring   Deployment/sample-spring   0%/50%    1         100       2
+sample-spring   Deployment/sample-spring   66%/50%   1         100       2
+sample-spring   Deployment/sample-spring   82%/50%   1         100       2
+sample-spring   Deployment/sample-spring   68%/50%   1         100       4
+sample-spring   Deployment/sample-spring   42%/50%   1         100       4
+sample-spring   Deployment/sample-spring   34%/50%   1         100       4
+sample-spring   Deployment/sample-spring   36%/50%   1         100       4
+```
 
-* 아파치 (httpd) 를 설치하면 ab (apache benchmark) 가 설치 됩니다.
-* 동시 1개 (concurrency, -c) 에서 백만개의 요청을 (requests, -n) 날려 봅시다.
-* 이 명령은 새창으로 해봅시다.
+Note:
+- `4` 정도는 무리 없이 감당하는 군요.
+
+### Cluster Autoscaler
+
+* 이번에는 동시 `3`개 (concurrency, -c) 에서 `1,000,000`개 (requests, -n) 의 요청을 보내 봅시다.
+  * 이 명령은 새창으로 해봅시다.
 
 ```bash
-ab -n 1000000 -c 1 https://sample-spring.apps.nalbam.com/stress
+ab -n 1000000 -c 3 http://sample-spring.apps.0.0.0.0.nip.io/stress
+```
+
+```bash
+kubectl get hpa -w
+```
+```
+NAME            REFERENCE                  TARGETS    MINPODS   MAXPODS   REPLICAS
+sample-spring   Deployment/sample-spring   77%/50%    1         100       7
+sample-spring   Deployment/sample-spring   65%/50%    1         100       7
+sample-spring   Deployment/sample-spring   64%/50%    1         100       7
+sample-spring   Deployment/sample-spring   63%/50%    1         100       7
+```
+
+* `Pod` 상태를 확인해 봅시다.
+
+```bash
+kubectl get pod -n default
+```
+```
+NAME                            READY     STATUS    RESTARTS   AGE
+sample-spring-6566df5db-4c7p6   1/1       Running   0          13m
+sample-spring-6566df5db-7sbdq   0/1       Pending   0          58s
+sample-spring-6566df5db-jjzlv   1/1       Running   0          4m
+sample-spring-6566df5db-9b6wb   1/1       Running   0          19m
+sample-spring-6566df5db-b5pb8   1/1       Running   0          58s
+sample-spring-6566df5db-dgp2v   0/1       Pending   0          58s
+sample-spring-6566df5db-wltj6   1/1       Running   0          10m
+```
+
+* `Dashboard` 를 통해서도 확인해 봅시다.
+
+```
+0/3 nodes are available: 1 PodToleratesNodeTaints, 2 Insufficient cpu. 
+```
+
+* 사용량이 더 늘어나면, 현재의 Cluster 공간보다 더 많은 Application 을 띄우려 시도 할것 입니다.
+* 하지만 `CPU` 자원이 부족하여 더이상 pod 가 생성되지 않고 에러가 발생하고 있습니다.
+
+* 그래서 `Cluster Autoscaler` 설치해 봅니다.
+
+```bash
+export ADDON="cluster-autoscaler-v1.8.0.yml"
+
+curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/${ADDON}
+
+MIN_NODES=2
+MAX_NODES=8
+AWS_REGION=ap-northeast-2
+GROUP_NAME="nodes.${KOPS_CLUSTER_NAME}"
+
+sed -i -e "s@{{MIN_NODES}}@${MIN_NODES}@g" "${ADDON}"
+sed -i -e "s@{{MAX_NODES}}@${MAX_NODES}@g" "${ADDON}"
+sed -i -e "s@{{GROUP_NAME}}@${GROUP_NAME}@g" "${ADDON}"
+sed -i -e "s@{{AWS_REGION}}@${AWS_REGION}@g" "${ADDON}"
+
+kubectl apply -f ${ADDON}
+```
+```
+serviceaccount/cluster-autoscaler created
+clusterrole.rbac.authorization.k8s.io/cluster-autoscaler created
+role.rbac.authorization.k8s.io/cluster-autoscaler created
+clusterrolebinding.rbac.authorization.k8s.io/cluster-autoscaler created
+rolebinding.rbac.authorization.k8s.io/cluster-autoscaler created
+deployment.extensions/cluster-autoscaler created
+```
+
+* 로그 조회도 해 봅시다.
+
+```bash
+kubectl logs $(kubectl get pod -n kube-system | grep cluster-autoscaler | awk '{print $1}') -n kube-system -f
+```
+
+* `Node` 가 `1`개가 늘어나 `3`개가 되었습니다.
+
+```bash
+kubectl get node
+```
+```
+NAME                                              STATUS    ROLES     AGE       VERSION
+ip-10-10-10-10.ap-northeast-2.compute.internal    Ready     master    41m       v1.9.6
+ip-10-10-10-11.ap-northeast-2.compute.internal    Ready     node      39m       v1.9.6
+ip-10-10-10-12.ap-northeast-2.compute.internal    Ready     node      39m       v1.9.6
+ip-10-10-10-13.ap-northeast-2.compute.internal    Ready     node      12m       v1.9.6
+```
+
+* pod 도 이제 `8` 에서 안정화 되었습니다.
+
+```bash
+kubectl get hpa -w
+```
+```
+NAME            REFERENCE                  TARGETS    MINPODS   MAXPODS   REPLICAS
+sample-spring   Deployment/sample-spring   64%/50%    1         100       7
+sample-spring   Deployment/sample-spring   63%/50%    1         100       7
+sample-spring   Deployment/sample-spring   56%/50%    1         100       7
+sample-spring   Deployment/sample-spring   56%/50%    1         100       8
+sample-spring   Deployment/sample-spring   44%/50%    1         100       8
+sample-spring   Deployment/sample-spring   44%/50%    1         100       8
 ```
 
 ## Clean Up
@@ -525,7 +648,7 @@ ab -n 1000000 -c 1 https://sample-spring.apps.nalbam.com/stress
 kops delete cluster --name=${KOPS_CLUSTER_NAME} --yes
 ```
 
-* EC2 Instance 를 지웁니다.
+* EC2 Instance (bastion) 를 지웁니다.
   * https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Instances
 
 * EC2 Key Pair 를 지웁니다.
