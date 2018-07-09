@@ -109,7 +109,7 @@ Note:
 * 바로 시작하고 싶다면!
 * 이 AMI 에 모든 tool 을 설치 해놨습니다.
 
-* https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Images:visibility=public-images;imageId=ami-021e47ad857e8fccb
+* https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home?region=ap-northeast-2#Images:visibility=public-images;imageId=ami-0fade7d6d32c285f4
 
 ---
 
