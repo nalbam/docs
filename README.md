@@ -15,7 +15,7 @@ revealOptions:
 sudo npm install -g reveal-md
 ```
 
-https://github.com/webpro/reveal-md
+<https://github.com/webpro/reveal-md>
 
 <!--s-->
 
