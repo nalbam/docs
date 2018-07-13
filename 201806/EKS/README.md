@@ -13,7 +13,7 @@
 ## Kubernetes
 
 * 컨테이너 작업을 자동화하는 오픈소스 플랫폼
-* Cluster 는 Master 와 Nodes 로 구성 
+* Cluster 는 Master 와 Nodes 로 구성
 
 > <img src="images/kubernetes.png" height="300">
 
@@ -22,7 +22,7 @@
 ## EKS
 
 * AWS 의 Kubernetes 관리형 서비스
-* AWS 에서 Master Node 관리 
+* AWS 에서 Master Node 관리
 * 우리는 Worker Node 만 관리
 
 > <img src="images/what-is-eks.png" height="300">
@@ -31,7 +31,7 @@
 
 ## Terraform
 
-* 인프라를 코드로 관리하고, 이를 배포/관리 할수 있는 오픈 소스 도구
+* 인프라를 코드로 관리하고, 이를 배포/관리 할 수 있는 오픈 소스 도구
 * Infrastructure as Code
 * Made by HashiCorp
 * https://www.terraform.io/
@@ -189,7 +189,7 @@ kubectl apply -f .output/aws_auth.yml
 * https://docs.aws.amazon.com/ko_kr/eks/latest/userguide/add-user-role.html
 
 Note:
-- 워커 노드가 마스터 노드에 join 할수 있도록 권한을 주어야 합니다.
+- 워커 노드가 마스터 노드에 join 할 수 있도록 권한을 주어야 합니다.
 
 ---
 
