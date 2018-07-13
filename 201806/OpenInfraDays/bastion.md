@@ -4,7 +4,7 @@
 
 Amazon Linux AMI
 
-* https://ap-southeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-southeast-1#Instances
+* <https://ap-southeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-southeast-1#Instances>
 
 ## Instance
 
@@ -61,7 +61,7 @@ sudo mv linux-amd64/helm /usr/local/bin/helm
 
 ```bash
 export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/latest | grep tag_name | cut -d'"' -f4)
-curl -sL https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv 
+curl -sL https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv
 sudo mv jx /usr/local/bin/jx
 ```
 
