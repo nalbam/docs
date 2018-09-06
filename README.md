@@ -33,7 +33,7 @@ reveal-md README.md
 
 ### Transition
 
-None - Fade - Slide - Convex - Concave - Zoom 
+None - Fade - Slide - Convex - Concave - Zoom
 
 <!--v-->
 
