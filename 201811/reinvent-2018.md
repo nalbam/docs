@@ -30,10 +30,10 @@ Tuesday, Nov 27, 6:15 PM - 7:15 PM – Venetian, Level 3, Murano 3205, T2
 Wednesday, Nov 28, 11:30 AM - 1:45 PM – Venetian, Level 2, Venetian H
 
 # CON318-R1 - [REPEAT 1] Performance for containers
-Wednesday, Nov 28, 1:45 PM - 2:45 PM – Venetian, Level 4, Delfino 4002, T2
+Wednesday, Nov 28, 1:45 PM - 2:45 PM – Venetian, Level 4, Delfino 4002
 
-# DEV306-R - [REPEAT] Monitoring for Operational Outcomes and Application Insights: Best Practices
-Wednesday, Nov 28, 3:15 PM - 5:30 PM – Venetian, Level 2, Venetian I, T2
+# DEV311-R - [REPEAT] Breaking Observability Chaos: Best Practices to Monitor AWS Cloud Native Apps
+Wednesday, Nov 28, 4:00 PM - 5:00 PM – Venetian, Level 2, Titian 2204
 ```
 
 ## Thursday
