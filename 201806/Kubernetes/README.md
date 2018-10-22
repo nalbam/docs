@@ -96,7 +96,7 @@ Note:
 * AMI 에 설치된 서비스
   * awscli, kops, kubectl, helm, docker, jenkins-x, openjdk8, maven, nodejs
 * CentOS 혹은 Amazon Linux 에서 다음 쉘로 설치 가능 합니다.
-  * `curl -sL toast.sh/helper/bastion.sh | bash`
+  * `curl -sL toast.sh/tools | bash`
 
 ### AWS EC2 - 접속 (Windows 사용자 - Git Bash)
 
