@@ -7,11 +7,12 @@
 * [Requirement](#requirement)
 * [Bastion Host](#bastion-host)
 * [Kubernetes Cluster](#kubernetes-cluster)
+* [Kubernetes Package Manager](#kubernetes-package-manager)
+* [Kubernetes Dashboard](#kubernetes-dashboard)
 * [Ingress Controller](#ingress-controller)
 * [Sample Application](#sample-application)
-* [Kubernetes Dashboard](#kubernetes-dashboard)
-* [Horizontal Pod Autoscaler](#horizontal-pod-autoscaler)
 * [Metrics Server](#metrics-server)
+* [Horizontal Pod Autoscaler](#horizontal-pod-autoscaler)
 * [Cluster Autoscaler](#cluster-autoscaler)
 * [Clean Up](#clean-up)
 
@@ -357,13 +358,54 @@ Note:
 * <https://kubernetes.io/docs/tasks/>
 * <https://kubernetes.io/docs/reference/kubectl/cheatsheet/>
 
-## Ingress Controller
+## Kubernetes Package Manager
 
-* Ingress Controller 로 도메인을 Cluster 내부 서비스로 연결해 줍니다.
+### Helm
+
+* 쿠버네티스에 어플리케이션을 설치하기 위해서 모든 리소스 와 수 많은 설정을 yaml 로 작성하여야 합니다.
+* `Helm` 은 `Chart` 라는 리소스 정의 묶음을 통하여 리소스를 미리 정해놓고, 간단한 설정만으로 설치 할수 있도록 도와 줍니다.
+* 이미 Bastion Host 에는 helm 이 설치 되어있으므로 초기화를 해주도록 하겠습니다.
+
+```bash
+helm init
+```
+
+### Cluster Role Binding
 
 ```bash
 kubectl create clusterrolebinding cluster-admin:kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default
+```
 
+## Kubernetes Dashboard
+
+* 웹 UI 를 통하여 정보와 상태를 볼수 있도록 Kubernetes Dashboard 를 올려 보겠습니다.
+
+```bash
+curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes/charts/kubernetes-dashboard.yaml
+cat kubernetes-dashboard.yaml
+
+helm upgrade --install kubernetes-dashboard stable/kubernetes-dashboard --values kubernetes-dashboard.yaml
+
+kubectl get deployment,pod,service
+```
+
+* Dashboard 의 Service Type 을 LoadBalancer 로 지정했습니다. 자동으로 ELB 가 생성되어 연결이 되었습니다.
+* ELB 도메인을 조회 해서, https:// 를 붙여 접속 하도록 하겠습니다.
+
+```bash
+DASHBOARD=$(kubectl get service | grep kubernetes-dashboard | awk '{print $4}')
+echo "https://${DASHBOARD}"
+```
+
+Note:
+
+* <https://github.com/kubernetes/dashboard/>
+
+## Ingress Controller
+
+* Ingress Controller 로 도메인을 Cluster 의 Service 로 연결해 주겠습니다.
+
+```bash
 helm upgrade --install nginx-ingress stable/nginx-ingress
 
 kubectl get deployment,pod,service
@@ -399,14 +441,12 @@ Note:
 * 샘플 어플리케이션을 생성해 봅니다.
 
 ```bash
-
 curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes/sample/sample-spring.yaml
 cat sample-spring.yaml
 
 sed -i -e "s/INGRESS_DOMAIN/sample-spring.${NIP_IO}/g" sample-spring.yaml
 
 kubectl apply -f sample-spring.yaml
-
 ```
 
 ```bash
@@ -416,13 +456,13 @@ ingress.extensions/sample-spring created
 horizontalpodautoscaler.autoscaling/sample-spring created
 ```
 
-* Pod 와 Service 가 만들어졌습니다.
+* Deployment, Pod, Service 가 만들어졌습니다.
 
 ```bash
 kubectl get deployment,pod,service
 ```
 
-* Ingress 설정에 의하여 각 도메인이 Ingress Controller 와 연결 되었습니다.
+* Ingress 의 도메인이 Ingress Controller 와 연결 되었습니다.
 
 ```bash
 kubectl get ingress
@@ -433,37 +473,10 @@ NAME            HOSTS                               ADDRESS        PORTS    AGE
 sample-spring   sample-spring.apps.0.0.0.0.nip.io   52.11.22.33    80       3m
 ```
 
-## Kubernetes Dashboard
-
-* 웹 UI 를 통하여 정보와 상태를 볼수 있도록 Kubernetes Dashboard 를 올려 보겠습니다.
-
-```bash
-
-curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes/charts/kubernetes-dashboard.yaml
-cat kubernetes-dashboard.yaml
-
-helm upgrade --install kubernetes-dashboard stable/kubernetes-dashboard --values kubernetes-dashboard.yaml
-
-kubectl get deployment,pod,service
-
-```
-
-* Dashboard 는 Ingress 설정을 하지 않고, Service type 을 LoadBalancer 로 지정했습니다.
-* 접속은 ELB 도메인을 조회 해서, https:// 를 붙여 접속 하도록 하겠습니다.
-
-```bash
-DASHBOARD=$(kubectl get service | grep kubernetes-dashboard | awk '{print $4}')
-echo "https://${DASHBOARD}"
-```
-
-Note:
-
-* <https://github.com/kubernetes/dashboard/>
-
 ## Metrics Server
 
-* 사용량이 늘어남에 따라 pod 를 늘어나고, 사용량이 줄어듦에 따라 pod 가 줄어드는 매직을 부려 봅니다.
 * CPU 사용량을 얻기 위하여 `metrics-server` 를 설치 합니다.
+* 이번에는 버전을 지정하여 설치 하겠습니다.
 
 ```bash
 helm upgrade --install metrics-server stable/metrics-server --version=1.1.0
