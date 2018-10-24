@@ -1,0 +1,28 @@
+# chart-version: latest
+
+nameOverride: cluster-autoscaler
+
+autoDiscovery:
+  clusterName: CLUSTER_NAME
+
+awsRegion: AWS_REGION
+
+extraArgs:
+  v: 4
+  stderrthreshold: info
+  logtostderr: true
+  expander: least-waste
+  skip-nodes-with-local-storage: false
+  skip-nodes-with-system-pods: true
+
+podAnnotations: {}
+
+nodeSelector:
+  kubernetes.io/role: master
+
+tolerations:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+
+rbac:
+  create: true

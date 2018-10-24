@@ -249,7 +249,6 @@ Note:
 * 클러스터를 실제 생성하기 전, 클러스터를 조회 할 수 있습니다.
 
 ```bash
-# get cluster
 kops get cluster
 ```
 
@@ -267,7 +266,6 @@ nodes                     Node      t2.medium      2      1      ap-northeast-2a
 * 클러스터를 수정 할 수 있 습니다.
 
 ```bash
-# edit cluster
 kops edit cluster
 ```
 
@@ -357,33 +355,27 @@ Note:
 * Ingress Controller 로 도메인을 내부 서비스로 연결해 줍니다.
 
 ```bash
-curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/ingress-nginx-v1.6.0.yml
 
-kubectl apply -f ingress-nginx-v1.6.0.yml
-```
+kubectl create clusterrolebinding cluster-admin:kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default
 
-```bash
-namespace/kube-ingress created
-serviceaccount/nginx-ingress-controller created
-clusterrole.rbac.authorization.k8s.io/nginx-ingress-controller created
-role.rbac.authorization.k8s.io/nginx-ingress-controller created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress-controller created
-rolebinding.rbac.authorization.k8s.io/nginx-ingress-controller created
-service/nginx-default-backend created
-deployment.extensions/nginx-default-backend created
-configmap/ingress-nginx created
-service/ingress-nginx created
-deployment.extensions/ingress-nginx created
+helm upgrade --install nginx-ingress stable/nginx-ingress --namespace kube-system
+
 ```
 
 * Ingress-nginx 의 ELB 에서 얻은 IP 로 nip.io 도메인을 만듭니다.
 
 ```bash
 # ELB 도메인을 획득 합니다.
-kubectl get svc -o wide -n kube-ingress
+ELB=$(kubectl get service --namespace kube-system | grep nginx-ingress-controller | awk '{print $4}')
+echo ${ELB}
 
 # ELB 도메인으로 ip 를 획득 합니다.
-dig +short $(kubectl get svc -o wide -n kube-ingress | grep ingress-nginx | awk '{print $4}' | head -n 1)
+IP=$(dig +short ${ELB} | head -1)
+echo ${IP}
+
+# nip.io 도메인
+NIP_IO="${IP}.nip.io"
+echo ${NIP_IO}
 ```
 
 Note:
@@ -396,30 +388,20 @@ Note:
 ### Sample Application
 
 * 샘플 어플리케이션 yaml 파일을 다운 받아 vi 로 편집 합니다.
-* 파일 하단의 nalbam.com 부분을 위의 ELB IP 를 넣어 `0.0.0.0.nip.io` 로 바꿔줍니다.
+* 파일의 `INGRESS_DOMAIN` 부분을 `sample-spring.${NIP_IO}` 로 바꿔줍니다.
 
 ```bash
-curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/sample/sample-spring-ing.yml
+curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes/sample/sample-spring.yaml
 
-vi sample-spring-ing.yml
-```
+sed -i -e "s/INGRESS_DOMAIN/sample-spring.${NIP_IO}/g" sample-spring.yaml
 
-```yaml
-spec:
-  rules:
-  - host: sample-spring.apps.0.0.0.0.nip.io
-    http:
-      paths:
-      - path: /
-        backend:
-          serviceName: sample-spring
-          servicePort: 80
+vi sample-spring.yaml
 ```
 
 * 샘플 어플리케이션을 생성해 봅니다.
 
 ```bash
-kubectl apply -f sample-spring-ing.yml
+kubectl apply -f sample-spring.yaml
 ```
 
 ```bash
@@ -432,18 +414,18 @@ horizontalpodautoscaler.autoscaling/sample-spring created
 * Pod 와 Service 가 만들어졌습니다.
 
 ```bash
-kubectl get deploy,pod,svc -n default
+kubectl get deployment,pod,service -n default
 ```
 
 * Ingress 설정에 의하여 각 도메인이 Ingress Controller 와 연결 되었습니다.
 
 ```bash
-kubectl get ing -o wide -n default
+kubectl get ingress -n default
 ```
 
 ```bash
-NAME            HOSTS                               ADDRESS                                                 PORTS     AGE
-sample-spring   sample-spring.apps.0.0.0.0.nip.io   a2aed74f77e8b-129875.ap-northeast-2.elb.amazonaws.com   80        43m
+NAME            HOSTS                               ADDRESS        PORTS    AGE
+sample-spring   sample-spring.apps.0.0.0.0.nip.io   52.11.22.33    80       3m
 ```
 
 ### Dashboard
@@ -451,6 +433,13 @@ sample-spring   sample-spring.apps.0.0.0.0.nip.io   a2aed74f77e8b-129875.ap-nort
 * 웹 UI 를 통하여 정보와 상태를 볼수 있도록 Dashboard 를 올려 보겠습니다.
 
 ```bash
+curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes/charts/kubernetes-dashboard.yaml
+
+sed -i -e "s/INGRESS_DOMAIN/kubernetes-dashboard.${NIP_IO}/g" kubernetes-dashboard.yaml
+
+helm upgrade --install kubernetes-dashboard stable/kubernetes-dashboard --namespace kube-system
+
+
 curl -LO https://raw.githubusercontent.com/nalbam/kubernetes/master/addons/dashboard-v1.8.3.yml
 
 kubectl apply -f dashboard-v1.8.3.yml
