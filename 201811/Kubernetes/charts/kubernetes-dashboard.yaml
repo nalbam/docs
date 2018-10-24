@@ -3,17 +3,7 @@
 nameOverride: kubernetes-dashboard
 
 service:
-  type: NodePort
-  externalPort: 443
-  nodePort: 30443
-
-ingress:
-  enabled: true
-  annotations:
-    kubernetes.io/ingress.class: nginx
-  path: /
-  hosts:
-    - INGRESS_DOMAIN
+  type: LoadBalancer
 
 rbac:
   create: true

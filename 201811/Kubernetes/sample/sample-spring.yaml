@@ -106,9 +106,9 @@ spec:
     kind: Deployment
     name: sample-spring
   minReplicas: 1
-  maxReplicas: 10
+  maxReplicas: 50
   metrics:
   - type: Resource
     resource:
       name: cpu
-      targetAverageUtilization: 65
+      targetAverageUtilization: 50
