@@ -29,20 +29,6 @@ spec:
         ports:
         - containerPort: 8080
           protocol: TCP
-        livenessProbe:
-          httpGet:
-            path: /live
-            port: 8080
-          initialDelaySeconds: 30
-          timeoutSeconds: 3
-          periodSeconds: 15
-        readinessProbe:
-          httpGet:
-            path: /read
-            port: 8080
-          initialDelaySeconds: 30
-          timeoutSeconds: 3
-          periodSeconds: 15
         resources:
           requests:
             cpu: 500m
