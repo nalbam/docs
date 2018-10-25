@@ -130,51 +130,39 @@ ssh -i PEM_PATH/awskrug.pem ec2-user@PUBLIC_IP
 
 ### SSH Key Gen
 
-* 클러스터를 관리할 ssh-key 를 생성 합니다.
+* 클러스터를 관리할 ssh-key 를 생성 합니다. [그림 1-12]
 * 클러스터 내에서 서로 접속 하기 위하여 필요 합니다.
 
 ```bash
 ssh-keygen -q -f ~/.ssh/id_rsa -N ''
 ```
 
-![ssh-key](images/bastion-01.png)
-
-Note:
-
-* 클러스터 내에서 서로 접속 하기 위하여 필요 합니다.
+![그림 1-12](images/1-12.png)
 
 ### AWS Credentials
 
-![Credentials](images/bastion-02.png)
-
-* IAM 으로 생성하여 메모장에 복사해둔 Access key ID 와 Secret access key 를 등록합니다.
+* 현재 접속해 있는 Bastion Host 에 AWS 리소스를 관리한 권한을 주기 위하여 Access key ID 와 Secret access key 를 등록합니다. [그림 1-13]
 
 ```bash
 aws configure
 ```
 
-Note:
-
-* AWS 에 객체를 생성하기 위하여 필요 합니다.
+![그림 1-13](images/1-13.png)
 
 ## kubernetes Cluster
 
-![Cluster](images/bastion-03.png)
-
 * 클러스터 이름을 설정 합니다.
 * 클러스터 상태를 저장할 S3 Bucket 을 만들어 줍니다.
-* `MY_UNIQUE_ID` 에는 본인의 이름을 넣어 만들어 주세요.
+* `<MY_UNIQUE_ID>` 에는 본인의 아이디를 넣어 만들어 주세요.
 
 ```bash
 export KOPS_CLUSTER_NAME=awskrug.k8s.local
-export KOPS_STATE_STORE=s3://kops-awskrug-MY_UNIQUE_ID
+export KOPS_STATE_STORE=s3://kops-awskrug-<MY_UNIQUE_ID>
 
 aws s3 mb ${KOPS_STATE_STORE} --region ap-northeast-2
 ```
 
 ### Create Cluster
-
-![Create Cluster](images/bastion-04.png)
 
 * Cloud 는 AWS 를 사용 하겠습니다.
 * Master Node 는 `c4.large` 1대로 하겠습니다.
@@ -334,7 +322,9 @@ helm init
 ### Cluster Role Binding
 
 ```bash
-kubectl create clusterrolebinding cluster-admin:kube-system:default --clusterrole=cluster-admin --serviceaccount=kube-system:default
+kubectl create clusterrolebinding cluster-admin:kube-system:default \
+    --clusterrole=cluster-admin \
+    --serviceaccount=kube-system:default
 ```
 
 ## Kubernetes Dashboard
