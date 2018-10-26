@@ -4,7 +4,7 @@
 
 ## Index
 
-> Kops 를 통하여 쿠버네티스 클러스터를 구성하며, Helm 을 통하여 여러가지 Package 를 설치 하도록 하겠습니다. Kubernetes Dashboard 를 설치하여 리소스를 조회하고, Ingress Controller 를 설치하여 도메인을 서비스로 라우팅을 하고, Sample Spring Application 에 도메인을 연결해 봅니다. 그리고 어플리케이션이 부하를 받아 더 많은 자원이 필요 할때 Horizontal Pod Autoscaler 로 Pod 가 늘어나는 실험을 하겠습니다. 또한 더 많은 부하를 받아 클러스터 확장이 필요할때 Cluster Autoscaler 로 Node 를 늘려 보겠습니다.
+Kops 를 통하여 쿠버네티스 클러스터를 구성하며, Helm 을 통하여 여러가지 Package 를 설치 하도록 하겠습니다. Kubernetes Dashboard 를 설치하여 리소스를 조회하고, Ingress Controller 를 설치하여 도메인을 서비스로 라우팅을 하고, Sample Spring Application 에 도메인을 연결해 봅니다. 그리고 어플리케이션이 부하를 받아 더 많은 자원이 필요 할때 Horizontal Pod Autoscaler 로 Pod 가 늘어나는 실험을 하겠습니다. 또한 더 많은 부하를 받아 클러스터 확장이 필요할때 Cluster Autoscaler 로 Node 를 늘려 보겠습니다.
 
 <!-- TOC depthFrom:2 depthTo:6 withLinks:1 updateOnSave:1 orderedList:0 -->
 
@@ -34,7 +34,7 @@
 
 ### AWS IAM - Access keys
 
-> AWS 객체들을 관리하기 위하여 Access Key 를 발급 받습니다.
+AWS 객체들을 관리하기 위하여 Access Key 를 발급 받습니다.
 
 * <https://console.aws.amazon.com/iam/home?region=ap-northeast-2> 를 브라우저에서 엽니다.
 * 좌측 메뉴에서 Users 를 선택합니다.
@@ -62,7 +62,7 @@
 
 ### AWS EC2 - Key Pairs
 
-> 생성할 Instance 에 접속하기 위하여 프라이빗 키를 발급 받습니다.
+생성할 Instance 에 접속하기 위하여 프라이빗 키를 발급 받습니다.
 
 * <https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home> 를 브라우저에서 엽니다.
 * 좌측 메뉴에서 `Key Pairs` 를 선택합니다.
@@ -78,7 +78,7 @@
 
 ### AWS EC2 - Instance
 
-> 빠른 진행을 위하여 필요한 툴이 미리 설치된 AMI 로 부터 인스턴스를 생성 합니다.
+빠른 진행을 위하여 필요한 툴이 미리 설치된 AMI 로 부터 인스턴스를 생성 합니다.
 
 * <https://ap-northeast-2.console.aws.amazon.com/ec2/v2/home> 를 브라우저에서 엽니다.
 * 좌측 메뉴에서 `AMIs` 를 선택합니다.
@@ -140,7 +140,7 @@ ssh -i PEM_PATH/awskrug.pem ec2-user@PUBLIC_IP
 
 ### SSH Key Gen
 
-> 클러스터 내에서 서로 접속 하기 위하여 ssh-key 를 생성 합니다.
+클러스터 내에서 서로 접속 하기 위하여 ssh-key 를 생성 합니다.
 
 ```bash
 ssh-keygen -q -f ~/.ssh/id_rsa -N ''
@@ -150,7 +150,7 @@ ssh-keygen -q -f ~/.ssh/id_rsa -N ''
 
 ### AWS Credentials
 
-> 현재 접속해 있는 Bastion Host 에 AWS 리소스를 관리한 권한을 주기 위하여 Access key ID 와 Secret access key 를 등록합니다.
+현재 접속해 있는 Bastion Host 에 AWS 리소스를 관리한 권한을 주기 위하여 Access key ID 와 Secret access key 를 등록합니다.
 
 ```bash
 aws configure
