@@ -4,6 +4,7 @@ nameOverride: kubernetes-dashboard
 
 service:
   type: LoadBalancer
+  externalPort: 443
 
 rbac:
   create: true
