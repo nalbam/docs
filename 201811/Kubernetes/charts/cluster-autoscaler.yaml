@@ -1,8 +1,10 @@
+# chart-repo: stable/cluster-autoscaler
 # chart-version: latest
 
 nameOverride: cluster-autoscaler
 
 autoDiscovery:
+  enabled: true
   clusterName: CLUSTER_NAME
 
 awsRegion: AWS_REGION
@@ -13,9 +15,8 @@ extraArgs:
   logtostderr: true
   expander: least-waste
   skip-nodes-with-local-storage: false
-  skip-nodes-with-system-pods: true
-
-podAnnotations: {}
+  skip-nodes-with-system-pods: false
+  scale-down-enabled: true
 
 nodeSelector:
   kubernetes.io/role: master
