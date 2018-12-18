@@ -1,0 +1,50 @@
+# chart-repo: stable/grafana
+# chart-version: latest
+
+nameOverride: grafana
+
+adminUser: admin
+adminPassword: password
+
+ingress:
+  enabled: INGRESS_ENABLED
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - INGRESS_DOMAIN
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: Prometheus
+      type: prometheus
+      url: http://prometheus-server
+      access: proxy
+      isDefault: true
+
+dashboardProviders:
+  dashboardproviders.yaml:
+    apiVersion: 1
+    providers:
+    - name: 'default'
+      orgId: 1
+      folder: ''
+      type: file
+      disableDeletion: false
+      editable: true
+      options:
+        path: /var/lib/grafana/dashboards/default
+
+dashboards:
+  default:
+    kube-mon:
+      # https://grafana.com/dashboards/9374
+      gnetId: 9374
+      revision: 1
+      datasource: Prometheus
+    kube-mon-apps:
+      # https://grafana.com/dashboards/9377
+      gnetId: 9377
+      revision: 1
+      datasource: Prometheus

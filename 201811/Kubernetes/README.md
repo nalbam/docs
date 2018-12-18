@@ -323,14 +323,14 @@ kubectl get deployment,pod,service
 ![그림 1-20](images/1-20.png)
 
 Dashboard 의 Service Type 을 LoadBalancer 로 지정했습니다. 따라서 자동으로 `ELB` 가 생성되어 연결이 되었습니다.
-ELB 도메인을 조회 해서, `https://` 를 붙여 접속 하도록 하겠습니다.
-이때 서버 인증서가 없으므로 기타 브라우저에서는 접속이 안될수 있습니다. 파이어폭스로 접속하면 보안설정을 우회 하여 접속 할 수 있습니다.
-또한 대시보드 토큰은 지금은 필요 없으므로 로그인 창에서는 Skip 을 해줍니다.
-이는 간편한 접속을 위함이며, 실제 서비스에서는 절대 해당 설정을 사용해서는 안되며, 보안설정은 관련 문서를 참고 하시어 적용 하시기 바랍니다.
+ELB 도메인을 조회 하여 접속 하도록 하겠습니다.
+
+대시보드 토큰은 지금은 필요 없으므로 로그인 창에서는 Skip 을 해줍니다.
+이는 간편한 접속을 위함이며, 실제 서비스에서는 보안설정 관련 문서를 참고 하시어 적용 하시기 바랍니다.
 
 ```bash
 DASHBOARD=$(kubectl get service | grep kubernetes-dashboard | awk '{print $4}')
-echo "https://${DASHBOARD}"
+echo "http://${DASHBOARD}"
 ```
 
 ![그림 1-21](images/1-21.png)

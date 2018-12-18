@@ -3,9 +3,11 @@
 
 nameOverride: kubernetes-dashboard
 
+enableInsecureLogin: true
+
 service:
   type: LoadBalancer
-  externalPort: 443
+  externalPort: 80
 
 rbac:
   create: true
