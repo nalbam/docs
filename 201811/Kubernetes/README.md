@@ -347,16 +347,16 @@ helm upgrade --install nginx-ingress stable/nginx-ingress
 kubectl get deployment,pod,service
 
 # ELB 도메인을 획득 합니다.
-ELB=$(kubectl get service | grep nginx-ingress-controller | awk '{print $4}')
-echo ${ELB}
+INGRESS=$(kubectl get service | grep nginx-ingress-controller | awk '{print $4}')
+echo ${INGRESS}
 
-# ELB 도메인으로 IP 를 획득 합니다.
-IP=$(dig +short ${ELB} | head -1)
+# ELB 도메인으로 ip 를 획득 합니다.
+IP=$(dig +short ${INGRESS} | head -1)
 echo ${IP}
 
-# BASE 도메인
-BASE_DOMAIN="${IP}.nip.io"
-echo ${BASE_DOMAIN}
+# nip.io 도메인
+NIP_IO="${IP}.nip.io"
+echo ${NIP_IO}
 ```
 
 ![그림 1-22](images/1-22.png)
@@ -366,7 +366,7 @@ echo ${BASE_DOMAIN}
 ## Sample Application
 
 도커 허브에 등록되어있는 샘플 스프링 어플리케이션을 여러분의 클러스터에 올려 보도록 하겠습니다.
-`sample-spring.yaml` 파일을 다운 받고, yaml 파일의 `INGRESS_DOMAIN` 을 `sample-spring.${BASE_DOMAIN}` 로 바꿔줍니다.
+`sample-spring.yaml` 파일을 다운 받고, yaml 파일의 `INGRESS_DOMAIN` 을 `sample-spring.${NIP_IO}` 로 바꿔줍니다.
 설치 스크립트를 실행 하면 Deployment, Service, Ingress, HorizontalPodAutoscaler 가 만들어집니다.
 
 ```bash
@@ -375,7 +375,7 @@ curl -sLO https://raw.githubusercontent.com/nalbam/docs/master/201811/Kubernetes
 cat sample-spring.yaml
 
 # 도메인 변경
-sed -i -e "s/INGRESS_DOMAIN/sample-spring.${BASE_DOMAIN}/g" sample-spring.yaml
+sed -i -e "s/INGRESS_DOMAIN/sample-spring.${NIP_IO}/g" sample-spring.yaml
 
 # 설치
 kubectl apply -f sample-spring.yaml
@@ -426,7 +426,7 @@ kubectl get hpa sample-spring
 평균 사용량이 50%가 넘으면 Pod 수를 늘리고 50% 보다 낮고, Pod 가 줄었을때 50% 가 넘지 않을것이라면 Pod 를 줄이게 됩니다.
 
 ```bash
-ab -n 1000000 -c 3 http://sample-spring.${BASE_DOMAIN}/stress
+ab -n 1000000 -c 3 http://sample-spring.${NIP_IO}/stress
 
 kubectl get hpa sample-spring -w
 ```
@@ -438,7 +438,7 @@ kubectl get hpa sample-spring -w
 이번에는 동시 요청수를 늘려보겠습니다. 동시 9개로 요청을 보냅니다.
 
 ```bash
-ab -n 1000000 -c 9 http://sample-spring.${BASE_DOMAIN}/stress
+ab -n 1000000 -c 9 http://sample-spring.${NIP_IO}/stress
 
 kubectl get hpa sample-spring -w
 
