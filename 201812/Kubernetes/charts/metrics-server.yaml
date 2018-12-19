@@ -1,0 +1,8 @@
+# chart-repo: stable/metrics-server
+# chart-version: latest
+
+nameOverride: metrics-server
+
+args:
+  - --kubelet-insecure-tls
+  - --kubelet-preferred-address-types=InternalIP,InternalDNS,ExternalDNS,ExternalIP,Hostname

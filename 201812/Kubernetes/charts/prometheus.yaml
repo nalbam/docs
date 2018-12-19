@@ -1,0 +1,4 @@
+# chart-repo: stable/prometheus
+# chart-version: latest
+
+nameOverride: prometheus
