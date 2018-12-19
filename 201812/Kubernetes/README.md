@@ -4,8 +4,8 @@
 
 ## Index
 
-Kops 를 통하여 쿠버네티스 클러스터를 구성하며, Helm 을 통하여 여러가지 Package 를 설치 하도록 하겠습니다.
-Kubernetes Dashboard 를 설치하여 리소스를 조회하고, Ingress Controller 를 설치하여 도메인을 서비스로 라우팅을 하고, Sample Spring Application 에 도메인을 연결해 봅니다.
+Kops 로 쿠버네티스 클러스터를 구성하며, Helm 으로 쿠버네티스 패키지를 설치 하도록 하겠습니다.
+Ingress Controller 를 설치하여 도메인을 서비스로 라우팅을 하고, Sample Spring Application 에 도메인을 연결해 봅니다.
 그리고 어플리케이션이 부하를 받아 더 많은 자원이 필요 할때 Horizontal Pod Autoscaler 로 Pod 가 늘어나는 실험을 하겠습니다.
 또한 더 많은 부하를 받아 클러스터 확장이 필요할때 Cluster Autoscaler 로 Node 를 늘려 보겠습니다.
 
@@ -404,10 +404,11 @@ kubectl get hpa sample-spring
 
 ![그림 1-29](images/1-29.png)
 
-자, 이제 설치된 샘플 어플리케이션에 부하를 줘 보겠습니다. 현재 접속하고 있는 Bastion Host 에는 `ab` (apache benchmark) 가 설치 되어있습니다.
+자, 이제 설치된 샘플 어플리케이션에 부하를 줘 보겠습니다.
+현재 접속하고 있는 Bastion Host 에는 `ab` (apache benchmark) 가 설치 되어있습니다.
 이 툴을 통하여 `동시 3개` (concurrency, -c) 에서 `1,000,000개` (requests, -n) 의 요청을 보냅니다.
 그리고 새로운 창에서 다시 접속하여 hpa 를 조회해 봅니다. 이때 `-w` 옵션 을 주면 연속해서 조회 할 수 있습니다.
-이때 hpa 는 CPU를 50% 이하로 맞추기 위해 노력 합니다.
+hpa 는 CPU를 50% 이하로 맞추기 위해 노력 합니다.
 평균 사용량이 50%가 넘으면 Pod 수를 늘리고 50% 보다 낮고, Pod 가 줄었을때 50% 가 넘지 않을것이라면 Pod 를 줄이게 됩니다.
 
 ```bash
@@ -467,6 +468,10 @@ kubectl get nodes,pod
 ```
 
 ![그림 1-33](images/1-33.png)
+
+## Prometheus
+
+## Grafana
 
 ## Clean Up
 
