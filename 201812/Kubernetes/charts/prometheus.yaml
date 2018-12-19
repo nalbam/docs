@@ -2,3 +2,19 @@
 # chart-version: latest
 
 nameOverride: prometheus
+
+server:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - prometheus.demo.opsnow.com
+
+alertmanager:
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    hosts:
+      - alertmanager-prometheus.demo.opsnow.com
