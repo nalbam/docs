@@ -1,52 +1,29 @@
----
-title: nalbam docs
-separator: <!--s-->
-verticalSeparator: <!--v-->
-revealOptions:
-  transition: slide
----
 # docs
 
-<!--s-->
+## 2018
 
-## reveal-md
+## [2018-06-21](./201806/EKS/README.md)
 
-```bash
-sudo npm install -g reveal-md
-```
+> [AWSKRUG 컨테이너 소모임](https://www.meetup.com/ko-KR/awskrug/events/251467130/)
 
-<https://github.com/webpro/reveal-md>
+## [2018-06-29](./201806/OpeninfraDays/README.md)
 
-<!--s-->
+> [Openinfra Days Korea 2018](https://event.openinfradays.kr/2018/session2/20_track1)
 
-## example
+## [2018-07-14](./201806/Kubernetes/README.md)
 
-```bash
-reveal-md README.md
-```
+> [AWSKRUG Hands-on Lab 2018 - Container #3](https://www.meetup.com/awskrug/events/251854018/)
 
-<!--s-->
+## 2018-09-04
 
-## demo
+> [AWSKRUG CLI모임](https://www.meetup.com/awskrug/events/253843549/)
 
-<!--v-->
+## [2018-11-06](./201811/kops-cui/README.md)
 
-### Transition
+> [AWS Dev Day 2018 (커뮤니티트랙)](https://aws.amazon.com/ko/events/devday/)
 
-None - Fade - Slide - Convex - Concave - Zoom
+## 2019
 
-<!--v-->
+### [2019-01-25](./201901/DeepRacer/README.md)
 
-### Fragments
-
-... wow ... <!-- .element: class="fragment" -->
-
-... wow ... <!-- .element: class="fragment" -->
-
-<!--v-->
-
-<!-- .slide: data-background="http://i.giphy.com/90F8aUepslB84.gif" -->
-
-<!--s-->
-
-## end
+> [AWS Community Day 2019](https://pages.awscloud.com/aws-community-day-seoul-2019.html)
