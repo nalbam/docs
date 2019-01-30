@@ -28,6 +28,6 @@
 
 > [AWSKRUG 컨테이너 소모임](https://www.meetup.com/ko-KR/awskrug/events/251467130/)
 
-### [2018-06-14 - 서버리스 아키텍처 테라폼으로 관리하기](./201806/Serverless/)
+### [2018-06-14 - Serverless with Terraform](./201806/Serverless/)
 
 > [AWSKRUG 서버리스 소모임](https://www.meetup.com/awskrug/events/251057806/)
