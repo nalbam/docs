@@ -2,6 +2,10 @@
 
 ## 2019
 
+### [2019-03-05 - aws cli v2](./201903/awscli_v2/)
+
+> [AWSKRUG CLI모임](https://www.meetup.com/awskrug/events/258924178/)
+
 ### [2019-01-25 - DeepRacer with RoboMaker](./201901/DeepRacer/)
 
 > [AWS Community Day 2019](https://pages.awscloud.com/aws-community-day-seoul-2019.html)
