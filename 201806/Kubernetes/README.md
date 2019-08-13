@@ -27,7 +27,7 @@
 ### AWS IAM - Access keys
 
 * AWS 객체들을 관리하기 위하여 Access Key 를 발급 받습니다.
-* <https://console.aws.amazon.com/iam/home?region=ap-northeast-2> 를 브라우저에서 엽니다.
+* <https://console.aws.amazon.com/iam/home> 를 브라우저에서 엽니다.
 * 좌측 메뉴에서 `Users` 를 선택합니다.
 * `Add user` 버튼으로 새 사용자를 만듭니다.
 
