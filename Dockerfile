@@ -1,6 +1,5 @@
 # Dockerfile
 
-# FROM webpronl/reveal-md
 FROM node:12-alpine
 
 RUN PUPPETEER_SKIP_CHROMIUM_DOWNLOAD="1" npm install -g reveal-md && \
