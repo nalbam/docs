@@ -49,4 +49,8 @@ None - Fade - Slide - Convex - Concave - Zoom
 
 <!--s-->
 
-## end
+## Thank you
+
+<!--s-->
+
+## The End
