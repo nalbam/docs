@@ -107,23 +107,92 @@ git clone https://github.com/nalbam/terraform-aws-vpc
 
 <!--v-->
 
-<img src="images/terraform_vpc_main.png" height="300">
+```
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key    = "vpc-demo.tfstate"
+  }
+  required_version = ">= 0.12"
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_vpc_variable_01.png" height="500">
+```
+variable "region" {
+  default = "ap-northeast-2"
+}
+```
+```
+variable "name" {
+  default = "seoul-dev-demo"
+}
+```
+```
+variable "vpc_id" {
+  default = ""
+}
+```
+```
+variable "vpc_cidr" {
+  default = "10.10.0.0/16"
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_vpc_variable_02.png" height="500">
+```
+variable "public_subnets" {
+  default = [
+    {
+      zone = "ap-northeast-2a"
+      cidr = "10.10.1.0/24"
+    },
+    {
+      zone = "ap-northeast-2b"
+      cidr = "10.10.2.0/24"
+    },
+    {
+      zone = "ap-northeast-2c"
+      cidr = "10.10.3.0/24"
+    },
+  ]
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_vpc_variable_03.png" height="500">
+```
+variable "private_subnets" {
+  default = [
+    {
+      zone = "ap-northeast-2a"
+      cidr = "10.10.4.0/24"
+    },
+    {
+      zone = "ap-northeast-2b"
+      cidr = "10.10.5.0/24"
+    },
+    {
+      zone = "ap-northeast-2c"
+      cidr = "10.10.6.0/24"
+    },
+  ]
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_vpc_variable_04.png" height="200">
+```
+variable "tags" {
+  default = {
+    "kubernetes.io/cluster/seoul-dev-demo-eks" = "shared"
+    "kubernetes.io/cluster/seoul-dev-spot-eks" = "shared"
+  }
+}
+```
 
 <!--v-->
 
@@ -131,7 +200,22 @@ git clone https://github.com/nalbam/terraform-aws-vpc
 
 <!--v-->
 
-<img src="images/terraform_vpc_output.png" height="600">
+```
+nat_ip = [ "52.78.138.128", ]
+private_subnet_cidr = [
+  "10.10.4.0/24", "10.10.5.0/24",
+]
+private_subnet_ids = [
+  "subnet-034abbc6fc10634ad", "subnet-0944761ec8c2f8f93",
+]
+public_subnet_cidr = [
+  "10.10.1.0/24", "10.10.2.0/24",
+]
+public_subnet_ids = [
+  "subnet-092938d936610cbfe", "subnet-026b23acc4b257e42",
+]
+vpc_id = vpc-0f2b2037a6dc5b059
+```
 
 <!--s-->
 
@@ -149,31 +233,124 @@ git clone https://github.com/nalbam/terraform-aws-eks
 
 <!--v-->
 
-<img src="images/terraform_eks_main.png" height="300">
+```
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key    = "eks-demo.tfstate"
+  }
+  required_version = ">= 0.12"
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_01.png" height="500">
+```
+variable "region" {
+  default = "ap-northeast-2"
+}
+```
+```
+variable "name" {
+  default = "seoul-dev-demo-eks"
+}
+```
+```
+variable "kubernetes_version" {
+  default = "1.14"
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_02.png" height="500">
+```
+variable "vpc_id" {
+  default = "vpc-075279b4e48b983ff"
+}
+```
+```
+variable "subnet_ids" {
+  default = [
+    "subnet-08a5b599722126606",
+    "subnet-08d4e11f445bb207f",
+    "subnet-0706fbc7ebe262da7",
+  ]
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_03.png" height="500">
+<img src="images/terraform_eks_roles.png">
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_04.png" height="500">
+```
+variable "launch_configuration_enable" {
+  default = false
+}
+```
+```
+variable "launch_template_enable" {
+  default = true
+}
+```
+```
+variable "launch_each_subnet" {
+  default = false
+}
+```
+```
+variable "associate_public_ip_address" {
+  default = true
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_05.png" height="500">
+```
+variable "instance_type" {
+  default = "m5.large"
+}
+```
+```
+variable "mixed_instances" {
+  default = ["c5.large", "r5.large"]
+}
+```
+```
+variable "volume_type" {
+  default = "gp2"
+}
+```
+```
+variable "volume_size" {
+  default = "32"
+}
+```
 
 <!--v-->
 
-<img src="images/terraform_eks_variable_06.png" height="500">
+```
+variable "min" {
+  default = "1"
+}
+```
+```
+variable "max" {
+  default = "5"
+}
+```
+```
+variable "on_demand_base" {
+  default = "0"
+}
+```
+```
+variable "on_demand_rate" {
+  default = "0"
+}
+```
 
 <!--v-->
 
@@ -181,7 +358,20 @@ git clone https://github.com/nalbam/terraform-aws-eks
 
 <!--v-->
 
-<img src="images/terraform_eks_output.png" height="600">
+```
+config = #
+
+# kube config
+aws eks update-kubeconfig \
+    --name seoul-dev-demo-eks \
+    --alias seoul-dev-demo-eks
+
+# or
+mkdir -p ~/.kube && \
+cp .output/kube_config.yaml ~/.kube/config
+
+#
+```
 
 <!--v-->
 
@@ -194,7 +384,7 @@ $ aws eks update-kubeconfig \
 <!--v-->
 
 ```bash
-$ kubectl get no
+$ kubectl get nodes
 
 NAME             STATUS   ROLES    AGE     VERSION
 ip-10-10-4-131   Ready    <none>   5d14h   v1.14.6-eks-5047ed
