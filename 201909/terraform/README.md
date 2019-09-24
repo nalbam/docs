@@ -98,7 +98,12 @@ revealOptions:
 <!--v-->
 
 ```bash
-git clone https://github.com/nalbam/terraform-aws-vpc
+
+
+$ git clone https://github.com/nalbam/terraform-aws-vpc
+
+
+
 ```
 
 <!--v-->
@@ -196,7 +201,14 @@ variable "tags" {
 
 <!--v-->
 
-> terraform apply
+```
+
+
+$ terraform apply
+
+
+
+```
 
 <!--v-->
 
@@ -224,7 +236,12 @@ vpc_id = vpc-0f2b2037a6dc5b059
 <!--v-->
 
 ```bash
-git clone https://github.com/nalbam/terraform-aws-eks
+
+
+$ git clone https://github.com/nalbam/terraform-aws-eks
+
+
+
 ```
 
 <!--v-->
@@ -333,7 +350,7 @@ variable "volume_size" {
 
 ```
 variable "min" {
-  default = "1"
+  default = "2"
 }
 ```
 ```
@@ -343,18 +360,25 @@ variable "max" {
 ```
 ```
 variable "on_demand_base" {
-  default = "0"
+  default = "1"
 }
 ```
 ```
 variable "on_demand_rate" {
-  default = "0"
+  default = "25"
 }
 ```
 
 <!--v-->
 
-> terraform apply
+```
+
+
+$ terraform apply
+
+
+
+```
 
 <!--v-->
 
@@ -376,9 +400,12 @@ cp .output/kube_config.yaml ~/.kube/config
 <!--v-->
 
 ```bash
+
 $ aws eks update-kubeconfig \
     --name seoul-dev-demo-eks \
     --alias seoul-dev-demo-eks
+
+
 ```
 
 <!--v-->
@@ -394,6 +421,68 @@ ip-10-10-6-48    Ready    <none>   5d14h   v1.14.6-eks-5047ed
 <!--s-->
 
 # Helm-cui
+
+<!--v-->
+
+```
+
+
+$ git clone https://github.com/nalbam/helm-cui
+
+
+
+```
+
+<!--v-->
+
+```
+
+
+$ ./helm-cui/run.sh
+
+
+
+```
+
+<!--v-->
+
+```
+  _          _                        _
+ | |__   ___| |_ __ ___     ___ _   _(_)
+ | '_ \ / _ \ | '_ ` _ \   / __| | | | |
+ | | | |  __/ | | | | | | | (__| |_| | |
+ |_| |_|\___|_|_| |_| |_|  \___|\__,_|_|
+
+
+ $ kubectl config use-context seoul-dev-demo-eks
+Switched to context "seoul-dev-demo-eks".
+
+
+```
+
+<!--v-->
+
+```
+ helm-cui
+
+ seoul-dev-demo-eks
+
+ 0. helm init
+
+ 1. devops
+ 2. kube-ingress
+ 3. kube-system
+ 4. monitor
+ 5. sample
+
+ i. istio..
+
+ d. remove
+
+ x. Exit
+
+ Enter your choice :
+ ```
 
 <!--s-->
 
