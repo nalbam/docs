@@ -111,19 +111,19 @@ git clone https://github.com/nalbam/terraform-aws-vpc
 
 <!--v-->
 
-<img src="images/terraform_vpc_valiable_01.png" height="500">
+<img src="images/terraform_vpc_variable_01.png" height="500">
 
 <!--v-->
 
-<img src="images/terraform_vpc_valiable_02.png" height="500">
+<img src="images/terraform_vpc_variable_02.png" height="500">
 
 <!--v-->
 
-<img src="images/terraform_vpc_valiable_03.png" height="500">
+<img src="images/terraform_vpc_variable_03.png" height="500">
 
 <!--v-->
 
-<img src="images/terraform_vpc_valiable_04.png" height="200">
+<img src="images/terraform_vpc_variable_04.png" height="200">
 
 <!--v-->
 
@@ -153,11 +153,53 @@ git clone https://github.com/nalbam/terraform-aws-eks
 
 <!--v-->
 
+<img src="images/terraform_eks_variable_01.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_eks_variable_02.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_eks_variable_03.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_eks_variable_04.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_eks_variable_05.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_eks_variable_06.png" height="500">
+
+<!--v-->
+
 > terraform apply
 
 <!--v-->
 
-<img src="images/terraform_vpc_output.png" height="600">
+<img src="images/terraform_eks_output.png" height="600">
+
+<!--v-->
+
+```bash
+$ aws eks update-kubeconfig \
+    --name seoul-dev-demo-eks \
+    --alias seoul-dev-demo-eks
+```
+
+<!--v-->
+
+```bash
+$ kubectl get no
+
+NAME             STATUS   ROLES    AGE     VERSION
+ip-10-10-4-131   Ready    <none>   5d14h   v1.14.6-eks-5047ed
+ip-10-10-6-48    Ready    <none>   5d14h   v1.14.6-eks-5047ed
+```
 
 <!--s-->
 
