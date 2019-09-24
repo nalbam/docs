@@ -14,15 +14,10 @@ $RECYCLE.BIN/
 # Mac
 .DS_Store
 
-# java
-*.class
-*.jar
-*.war
-*.ear
-
-# maven
-target/
-build/
+# Nodejs
+node_modules/
+package-lock.json
+dist/
 
 # eclipse
 .settings/
