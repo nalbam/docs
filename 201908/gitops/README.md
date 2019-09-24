@@ -9,4 +9,7 @@
 
 * 일시: 2019-08-27 19:00
 * <https://festa.io/events/417>
+
+## Slide
+
 * <https://docs.google.com/presentation/d/1CbGrh90h9J3Pw9r9fx9EPQWvxQcYjJ2Iu3Gw057cJZ8>
