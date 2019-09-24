@@ -26,11 +26,11 @@ revealOptions:
 
 <!--v-->
 
-<img src="images/container_evolution.svg" height="600">
+![container_evolution](images/container_evolution.svg)
 
 <!--v-->
 
-<img src="images/kubernetes.png" height="600">
+![kubernetes](images/kubernetes.png)
 
 <!--s-->
 
@@ -44,7 +44,7 @@ revealOptions:
 
 <!--v-->
 
-<img src="images/kubernetes_eks.png" height="600">
+![kubernetes_eks](images/kubernetes_eks.png)
 
 <!--s-->
 
@@ -108,7 +108,7 @@ $ git clone https://github.com/nalbam/terraform-aws-vpc
 
 <!--v-->
 
-<img src="images/terraform_vpc.png" height="600">
+![terraform_vpc](images/terraform_vpc.png)
 
 <!--v-->
 
@@ -246,7 +246,7 @@ $ git clone https://github.com/nalbam/terraform-aws-eks
 
 <!--v-->
 
-<img src="images/terraform_eks.png" height="600">
+![terraform_eks](images/terraform_eks.png)
 
 <!--v-->
 
@@ -298,7 +298,7 @@ variable "subnet_ids" {
 
 <!--v-->
 
-<img src="images/terraform_eks_roles.png">
+![terraform_eks_roles](images/terraform_eks_roles.png)
 
 <!--v-->
 
