@@ -25,6 +25,14 @@ npm install -g reveal-md
 reveal-md docs/reveal.md
 ```
 
+<!--v-->
+
+## example
+
+```bash
+reveal-md docs/reveal.md --print docs/reveal.md --print-size 1280x720
+```
+
 <!--s-->
 
 ## demo
