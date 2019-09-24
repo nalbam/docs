@@ -1,8 +1,13 @@
 # Dockerfile
 
-FROM webpronl/reveal-md
+# FROM webpronl/reveal-md
+FROM node:12-alpine
 
-EXPOSE 1948
+RUN npm install -g reveal-md
 
-WORKDIR /slides
-ADD . /slides
+EXPOSE 8888
+
+WORKDIR /docs
+ADD . /docs
+
+CMD ["reveal-md", "-w", "-port", "8888", "/docs"]
