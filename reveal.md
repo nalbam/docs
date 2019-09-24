@@ -22,7 +22,7 @@ sudo npm install -g reveal-md
 ## example
 
 ```bash
-reveal-md README.md
+reveal-md docs/reveal.md
 ```
 
 <!--s-->
