@@ -26,11 +26,11 @@ revealOptions:
 
 <!--v-->
 
-<img src="images/container_evolution.svg" width="1000">
+<img src="images/container_evolution.svg" height="600">
 
 <!--v-->
 
-<img src="images/kubernetes.png" width="1000">
+<img src="images/kubernetes.png" height="600">
 
 <!--s-->
 
@@ -44,7 +44,7 @@ revealOptions:
 
 <!--v-->
 
-<img src="images/kubernetes_eks.png" width="1000">
+<img src="images/kubernetes_eks.png" height="600">
 
 <!--s-->
 
@@ -58,11 +58,106 @@ revealOptions:
 
 <!--s-->
 
+# Prepare
+
+<!--v-->
+
+> AWS Account
+
+* Access Key, Secret Access Key
+
+<!--v-->
+
+> 관리 리소스 메타 저장소
+
+* AWS S3 Bucket
+
+* terraform-nalbam-seoul
+
+<!--v-->
+
+> Install Tools
+
+* awscli
+* terraform
+* kubectl
+* helm
+
+<!--s-->
+
 # AWS VPC
+
+<!--v-->
+
+* Amazon Virtual Private Cloud
+
+* 사용자가 정의한 가상 네트워크
+
+* VPC, Subnets, Route Tables
+
+<!--v-->
+
+```bash
+git clone https://github.com/nalbam/terraform-aws-vpc
+```
+
+<!--v-->
+
+<img src="images/terraform_vpc.png" height="600">
+
+<!--v-->
+
+<img src="images/terraform_vpc_main.png" height="300">
+
+<!--v-->
+
+<img src="images/terraform_vpc_valiable_01.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_vpc_valiable_02.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_vpc_valiable_03.png" height="500">
+
+<!--v-->
+
+<img src="images/terraform_vpc_valiable_04.png" height="200">
+
+<!--v-->
+
+> terraform apply
+
+<!--v-->
+
+<img src="images/terraform_vpc_output.png" height="600">
 
 <!--s-->
 
 # AWS EKS
+
+<!--v-->
+
+```bash
+git clone https://github.com/nalbam/terraform-aws-eks
+```
+
+<!--v-->
+
+<img src="images/terraform_eks.png" height="600">
+
+<!--v-->
+
+<img src="images/terraform_eks_main.png" height="300">
+
+<!--v-->
+
+> terraform apply
+
+<!--v-->
+
+<img src="images/terraform_vpc_output.png" height="600">
 
 <!--s-->
 
