@@ -2,6 +2,14 @@
 
 ## 2019
 
+### [2019-08-27 - gitops](./201908/gitops/)
+
+> [CircleCI 모임](https://festa.io/events/417)
+
+### [2019-08-21 - gitops](./201908/gitops/)
+
+> [AWSKRUG Container모임](https://www.meetup.com/awskrug/events/263607584/)
+
 ### [2019-03-05 - aws cli v2](./201903/awscli_v2/)
 
 > [AWSKRUG CLI모임](https://www.meetup.com/awskrug/events/258924178/)
