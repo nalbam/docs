@@ -2,4 +2,4 @@
 
 PORT=${PORT:-3000}
 
-reveal-md -w -port ${PORT} /docs
+reveal-md --disable-auto-open --watch -port ${PORT} /docs
