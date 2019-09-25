@@ -97,6 +97,10 @@ revealOptions:
 
 <!--v-->
 
+<!-- .slide: data-background="images/terraform_vpc_ach.png" -->
+
+<!--v-->
+
 ```bash
 
 
@@ -232,6 +236,10 @@ vpc_id = vpc-0f2b2037a6dc5b059
 <!--s-->
 
 # AWS EKS
+
+<!--v-->
+
+<!-- .slide: data-background="images/terraform_eks_ach.png" -->
 
 <!--v-->
 
