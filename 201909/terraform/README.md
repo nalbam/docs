@@ -78,9 +78,14 @@ revealOptions:
 
 > Install Tools
 
-* awscli
 * terraform
+
 * kubectl
+
+* awscli
+
+* aws-iam-authenticator
+
 * helm
 
 <!--s-->
@@ -216,22 +221,7 @@ $ terraform apply
 
 <!--v-->
 
-```
-nat_ip = [ "52.78.138.128", ]
-private_subnet_cidr = [
-  "10.10.4.0/24", "10.10.5.0/24",
-]
-private_subnet_ids = [
-  "subnet-034abbc6fc10634ad", "subnet-0944761ec8c2f8f93",
-]
-public_subnet_cidr = [
-  "10.10.1.0/24", "10.10.2.0/24",
-]
-public_subnet_ids = [
-  "subnet-092938d936610cbfe", "subnet-026b23acc4b257e42",
-]
-vpc_id = vpc-0f2b2037a6dc5b059
-```
+<!-- .slide: data-background="images/terraform_vpc_output.png" -->
 
 <!--s-->
 
@@ -390,20 +380,7 @@ $ terraform apply
 
 <!--v-->
 
-```
-config = #
-
-# kube config
-aws eks update-kubeconfig \
-    --name seoul-dev-demo-eks \
-    --alias seoul-dev-demo-eks
-
-# or
-mkdir -p ~/.kube && \
-cp .output/kube_config.yaml ~/.kube/config
-
-#
-```
+<!-- .slide: data-background="images/terraform_eks_output.png" -->
 
 <!--v-->
 
@@ -454,43 +431,11 @@ $ ./helm-cui/run.sh
 
 <!--v-->
 
-```
-  _          _                        _
- | |__   ___| |_ __ ___     ___ _   _(_)
- | '_ \ / _ \ | '_ ` _ \   / __| | | | |
- | | | |  __/ | | | | | | | (__| |_| | |
- |_| |_|\___|_|_| |_| |_|  \___|\__,_|_|
-
-
- $ kubectl config use-context seoul-dev-demo-eks
-Switched to context "seoul-dev-demo-eks".
-
-
-```
+![terraform_eks_roles](images/helm_cui_intro.png)
 
 <!--v-->
 
-```
- helm-cui
-
- seoul-dev-demo-eks
-
- 0. helm init
-
- 1. devops
- 2. kube-ingress
- 3. kube-system
- 4. monitor
- 5. sample
-
- i. istio..
-
- d. remove
-
- x. Exit
-
- Enter your choice :
- ```
+![terraform_eks_roles](images/helm_cui_main.png)
 
 <!--s-->
 
