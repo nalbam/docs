@@ -26,7 +26,7 @@ revealOptions:
 
 <!--v-->
 
-![container_evolution](images/container_evolution.svg)
+![container_evolution](images/container_evolution.png)
 
 <!--v-->
 
@@ -90,7 +90,7 @@ revealOptions:
 
 <!--s-->
 
-# AWS VPC
+# VPC
 
 <!--v-->
 
@@ -225,7 +225,107 @@ $ terraform apply
 
 <!--s-->
 
-# AWS EKS
+# Bastion
+
+<!--v-->
+
+* 내부망의 서버에 접근하기 위한 게이트
+
+<!--v-->
+
+```bash
+
+
+$ git clone https://github.com/nalbam/terraform-aws-bastion
+
+
+
+```
+
+<!--v-->
+
+![terraform_eks](images/terraform_bastion.png)
+
+<!--v-->
+
+```
+terraform {
+  backend "s3" {
+    region = "ap-northeast-2"
+    bucket = "terraform-nalbam-seoul"
+    key    = "bastion.tfstate"
+  }
+  required_version = ">= 0.12"
+}
+```
+
+<!--v-->
+
+```
+variable "region" {
+  default = "ap-northeast-2"
+}
+```
+```
+variable "name" {
+  default = "seoul-dev-demo-bastion"
+}
+```
+```
+variable "vpc_id" {
+  default = "vpc-050facec749c33357"
+}
+```
+```
+variable "subnet_id" {
+  default = "subnet-0dc7b46f475b61086"
+}
+```
+
+<!--v-->
+
+```
+variable "administrator" {
+  default = true
+}
+```
+```
+variable "key_name" {
+  default = "nalbam-seoul"
+}
+```
+```
+data "template_file" "setup" {
+  template = file("template/setup.sh")
+
+  vars = {
+    HOSTNAME = var.name
+  }
+}
+```
+
+<!--v-->
+
+```
+
+
+$ terraform apply
+
+
+
+```
+
+<!--v-->
+
+![terraform_vpc](images/terraform_bastion_output.png)
+
+<!--v-->
+
+![terraform_vpc](images/terraform_bastion_ssh.png)
+
+<!--s-->
+
+# EKS
 
 <!--v-->
 
