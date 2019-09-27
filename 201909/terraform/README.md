@@ -221,7 +221,7 @@ $ terraform apply
 
 <!--v-->
 
-<!-- .slide: data-background="images/terraform_vpc_output.png" -->
+![terraform_vpc](images/terraform_vpc_output.png)
 
 <!--s-->
 
@@ -380,7 +380,7 @@ $ terraform apply
 
 <!--v-->
 
-<!-- .slide: data-background="images/terraform_eks_output.png" -->
+![terraform_vpc](images/terraform_eks_output.png)
 
 <!--v-->
 
