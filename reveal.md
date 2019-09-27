@@ -22,7 +22,7 @@ npm install -g reveal-md
 ## example
 
 ```bash
-reveal-md docs/reveal.md
+reveal-md --watch --theme night docs/reveal.md
 ```
 
 <!--v-->

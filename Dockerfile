@@ -13,4 +13,4 @@ ADD . /docs
 # ADD entrypoint.sh /entrypoint.sh
 # ENTRYPOINT ["/entrypoint.sh"]
 
-CMD ["sh", "-c", "reveal-md /docs --disable-auto-open --watch"]
+CMD ["sh", "-c", "reveal-md /docs --disable-auto-open --watch --theme night"]
