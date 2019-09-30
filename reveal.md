@@ -45,6 +45,12 @@ None - Fade - Slide - Convex - Concave - Zoom
 
 <!--v-->
 
+### Image
+
+![image](http://i.giphy.com/90F8aUepslB84.gif) <!-- .element style="border: 0;" -->
+
+<!--v-->
+
 ### Fragments
 
 ... wow ... <!-- .element: class="fragment" -->
@@ -57,8 +63,26 @@ None - Fade - Slide - Convex - Concave - Zoom
 
 <!--s-->
 
-## Thank you
+## shortcuts
+
+<!--v-->
+
+> Fullscreen
+
+`"F"`, `"ESC"` to exit fullscreen mode
+
+<!--v-->
+
+> Speaker mode
+
+`"S"` it synchronizes 2 windows: one with the presentation, and another with a timer and all speaker notes!
+
+<!--v-->
+
+> Zoom-in
+
+`"ALT+click"` or `"option+click"` make the view zoom at the position of your mouse’s pointer
 
 <!--s-->
 
-## The End
+## Thank you

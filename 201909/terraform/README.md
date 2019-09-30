@@ -26,11 +26,11 @@ revealOptions:
 
 <!--v-->
 
-![container_evolution](images/container_evolution.png)
+![container_evolution](images/container_evolution.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
-![kubernetes](images/kubernetes.png)
+![kubernetes](images/kubernetes.png) <!-- .element style="border: 0;" -->
 
 <!--s-->
 
@@ -44,7 +44,7 @@ revealOptions:
 
 <!--v-->
 
-![kubernetes_eks](images/kubernetes_eks.png)
+![kubernetes_eks](images/kubernetes_eks.png) <!-- .element style="border: 0;" -->
 
 <!--s-->
 
@@ -117,7 +117,7 @@ $ git clone https://github.com/nalbam/terraform-aws-vpc
 
 <!--v-->
 
-![terraform_vpc](images/terraform_vpc.png)
+![terraform_vpc](images/terraform_vpc.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
@@ -221,7 +221,7 @@ $ terraform apply
 
 <!--v-->
 
-![terraform_vpc](images/terraform_vpc_output.png)
+![terraform_vpc](images/terraform_vpc_output.png) <!-- .element style="border: 0;" -->
 
 <!--s-->
 
@@ -244,7 +244,7 @@ $ git clone https://github.com/nalbam/terraform-aws-bastion
 
 <!--v-->
 
-![terraform_eks](images/terraform_bastion.png)
+![terraform_eks](images/terraform_bastion.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
@@ -317,11 +317,11 @@ $ terraform apply
 
 <!--v-->
 
-![terraform_vpc](images/terraform_bastion_output.png)
+![terraform_vpc](images/terraform_bastion_output.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
-![terraform_vpc](images/terraform_bastion_ssh.png)
+![terraform_vpc](images/terraform_bastion_ssh.png) <!-- .element style="border: 0;" -->
 
 <!--s-->
 
@@ -344,7 +344,7 @@ $ git clone https://github.com/nalbam/terraform-aws-eks
 
 <!--v-->
 
-![terraform_eks](images/terraform_eks.png)
+![terraform_eks](images/terraform_eks.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
@@ -396,7 +396,7 @@ variable "subnet_ids" {
 
 <!--v-->
 
-![terraform_eks_roles](images/terraform_eks_roles.png)
+![terraform_eks_roles](images/terraform_eks_roles.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
@@ -417,7 +417,7 @@ variable "launch_each_subnet" {
 ```
 ```
 variable "associate_public_ip_address" {
-  default = true
+  default = false
 }
 ```
 
@@ -480,7 +480,7 @@ $ terraform apply
 
 <!--v-->
 
-![terraform_vpc](images/terraform_eks_output.png)
+![terraform_vpc](images/terraform_eks_output.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
@@ -509,6 +509,16 @@ ip-10-10-6-48    Ready    <none>   5d14h   v1.14.6-eks-5047ed
 
 <!--v-->
 
+* nginx-ingress
+* cert-manager
+* kube2iam
+* metrics-server
+* cluster-autoscaler
+* prometheus & grafana
+* jenkins & nexus
+
+<!--v-->
+
 ```
 
 
@@ -531,11 +541,15 @@ $ ./helm-cui/run.sh
 
 <!--v-->
 
-![terraform_eks_roles](images/helm_cui_intro.png)
+![terraform_eks_roles](images/helm_cui_intro.png) <!-- .element style="border: 0;" -->
 
 <!--v-->
 
-![terraform_eks_roles](images/helm_cui_main.png)
+![terraform_eks_roles](images/helm_cui_main.png) <!-- .element style="border: 0;" -->
+
+<!--v-->
+
+![terraform_eks_roles](images/helm_ls.png) <!-- .element style="border: 0;" -->
 
 <!--s-->
 
