@@ -1,30 +1,26 @@
 # re:Invent 2019
 
-## 12월 2일
+## 12월 2일 - Venetian, Mirage
 
-* CON317-R - [REPEAT] Securing your Amazon EKS cluster
-  * Monday, Dec 2, 11:30 AM - 12:30 PM
-  * – Mirage, Events Center C1 - Table 1 - T1
-
-* AIM225 - How to build a car that does an 8.64-second lap with AWS DeepRacer :star:
+* :star: AIM225 - How to build a car that does an 8.64-second lap with AWS DeepRacer
   * Monday, Dec 2, 1:00 PM - 2:00 PM
   * – Mirage, St. Thomas A - T1
 
-* CON307-S - Top 5 container and Kubernetes best practices :star:
+* :star: CON307-S - Top 5 container and Kubernetes best practices
   * Monday, Dec 2, 2:30 PM - 3:30 PM
   * – Venetian | Palazzo, Level 2, Titian 2205 - T1 -S
 
-## 12월 3일
+## 12월 3일 - Venetian, Mirage
 
-* CON418-R1 - [REPEAT 1] Deep dive: Kubernetes auto scaling :star:
+* :star: CON418-R1 - [REPEAT 1] Deep dive: Kubernetes auto scaling
   * Tuesday, Dec 3, 11:30 AM - 12:30 PM
   * – Mirage, Grand Ballroom B - Table 4 - T1
 
-* DOP324-R1 - [REPEAT 1] Slack ChatOps for AWS: Setting up AWS Chatbot
+* CON317-R1 - [REPEAT 1] Securing your Amazon EKS cluster
   * Tuesday, Dec 3, 4:00 PM - 5:00 PM
-  * – Mirage, Grand Ballroom B - Table 6 - T1
+  * – Mirage, Events Center C1 - Table 10 - T1
 
-## 12월 4일
+## 12월 4일 - MGM
 
 * DOP406-R - [REPEAT] Introduction to the AWS CLI v2
   * Wednesday, Dec 4, 8:30 AM - 9:30 AM
@@ -38,13 +34,13 @@
   * Wednesday, Dec 4, 3:15 PM - 5:30 PM
   * – MGM, Level 1, Terrace Ballroom 153 - T2
 
-## 12월 5일
+## 12월 5일 - Venetian, Mirage
 
 * CON417-R3 - [REPEAT 3] Live debug microservice running on Kubernetes cluster
   * Thursday, Dec 5, 11:30 AM - 12:30 PM
   * – Mirage, Events Center C1 - Table 2 - T1
 
-* CON416-R3 - [REPEAT 3] Migrating applications to Amazon EKS using Velero :star:
+* :star: CON416-R3 - [REPEAT 3] Migrating applications to Amazon EKS using Velero
   * Thursday, Dec 5, 1:00 PM - 2:00 PM
   * – Mirage, Events Center C1 - Table 3 - T1
 
