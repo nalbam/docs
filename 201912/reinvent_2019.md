@@ -2,6 +2,10 @@
 
 ## 12월 2일
 
+* AIM225 - How to build a car that does an 8.64-second lap with AWS DeepRacer
+  * Monday, Dec 2, 1:00 PM - 2:00 PM
+  * – Mirage, St. Thomas A - T1
+
 * DOP205-S - Amplifying CI/CD helped Wag! reduce release process by 600%
   * Monday, Dec 2, 1:00 PM - 2:00 PM
   * – Aria, Level 3 West, Juniper 4 - T1 -S
@@ -57,3 +61,7 @@
   * – Venetian | Palazzo, Level 3, Lido 3002 - T1
 
 ## 12월 6일
+
+## 기타
+
+* AIM428 - Under the hood of AWS DeepRacer: Advanced RL driving course
