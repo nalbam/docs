@@ -2,13 +2,13 @@
 
 ## 12월 2일
 
-* CON307-S - Top 5 container and Kubernetes best practices
-  * Monday, Dec 2, 2:30 PM - 3:30 PM
-  * – Venetian | Palazzo, Level 2, Titian 2205 - T1 -S
-
 * DOP205-S - Amplifying CI/CD helped Wag! reduce release process by 600%
   * Monday, Dec 2, 1:00 PM - 2:00 PM
   * – Aria, Level 3 West, Juniper 4 - T1 -S
+
+* CON307-S - Top 5 container and Kubernetes best practices
+  * Monday, Dec 2, 2:30 PM - 3:30 PM
+  * – Venetian | Palazzo, Level 2, Titian 2205 - T1 -S
 
 ## 12월 3일
 
