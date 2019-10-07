@@ -10,7 +10,7 @@
   * Monday, Dec 2, 1:00 PM - 2:00 PM
   * – Mirage, St. Thomas A - T1
 
-* CON307-S - Top 5 container and Kubernetes best practices
+* CON307-S - Top 5 container and Kubernetes best practices :star:
   * Monday, Dec 2, 2:30 PM - 3:30 PM
   * – Venetian | Palazzo, Level 2, Titian 2205 - T1 -S
 
@@ -20,9 +20,9 @@
   * Tuesday, Dec 3, 11:30 AM - 12:30 PM
   * – Mirage, Grand Ballroom B - Table 4 - T1
 
-* CON323-R1 - [REPEAT 1] AWS App Mesh under the hood
-  * Tuesday, Dec 3, 5:30 PM - 6:30 PM
-  * – MGM, Level 3, Premier Ballroom 309 - T1
+* DOP324-R1 - [REPEAT 1] Slack ChatOps for AWS: Setting up AWS Chatbot
+  * Tuesday, Dec 3, 4:00 PM - 5:00 PM
+  * – Mirage, Grand Ballroom B - Table 6 - T1
 
 ## 12월 4일
 
@@ -61,3 +61,4 @@
 ## 기타
 
 * AIM428 - Under the hood of AWS DeepRacer: Advanced RL driving course :star:
+* DOP333-R - [REPEAT] Deploy your web app safely with blue/green deployments
