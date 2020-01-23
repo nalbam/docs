@@ -109,7 +109,7 @@ AWS 객체들을 관리하기 위하여 Access Key 를 발급 받습니다.
 * Amazon Linux 또는 CentOS 또는 Ubuntu 에서 다음 쉘로 설치 가능 합니다.
 
 ```bash
-curl -sL toast.sh/tools | bash
+curl -sL curl -sL opspresso.com/tools | bash | bash
 ```
 
 ### AWS EC2 접속 - Windows 사용자 (git bash)
