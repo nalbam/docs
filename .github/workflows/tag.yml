@@ -1,6 +1,9 @@
 name: Build-Tag
 
 on:
+  push:
+    tags:
+      - "*"
   release:
     types:
       - created
