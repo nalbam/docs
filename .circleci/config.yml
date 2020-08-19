@@ -58,6 +58,8 @@ jobs:
     docker:
       - image: circleci/python
     working_directory: ~/works
+    environment:
+      TG_PROJECT: sample-docs
     steps:
       - attach_workspace:
           at: ~/works
