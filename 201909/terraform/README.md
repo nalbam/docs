@@ -128,7 +128,6 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "vpc-demo.tfstate"
   }
-  required_version = ">= 0.12"
 }
 ```
 
@@ -255,7 +254,6 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "bastion.tfstate"
   }
-  required_version = ">= 0.12"
 }
 ```
 
@@ -355,7 +353,6 @@ terraform {
     bucket = "terraform-nalbam-seoul"
     key    = "eks-demo.tfstate"
   }
-  required_version = ">= 0.12"
 }
 ```
 
