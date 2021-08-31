@@ -43,6 +43,7 @@ jobs:
             bash ./target/builder.sh
   buildx:
     docker:
+      - image: circleci/python
       - image: jdrouet/docker-with-buildx:stable
     working_directory: ~/works
     steps:
