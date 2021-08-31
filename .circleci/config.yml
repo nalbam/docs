@@ -32,7 +32,7 @@ jobs:
             bash ./target/builder.sh
   release:
     docker:
-      - image: circleci/golang
+      - image: opspresso/awscli
     working_directory: ~/works
     steps:
       - attach_workspace:
