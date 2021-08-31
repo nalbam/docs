@@ -20,22 +20,22 @@ jobs:
         with:
           args: --version
 
-      - name: Release to GitHub
-        uses: opspresso/action-builder@master
-        with:
-          args: --release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Release to GitHub
+      #   uses: opspresso/action-builder@master
+      #   with:
+      #     args: --release
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build & Push to Docker Hub
-        uses: opspresso/action-builder@master
-        with:
-          args: --docker
-        env:
-          # USERNAME: ${{ secrets.DOCKER_USERNAME }}
-          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-          # TAG_NAME: ${{ github.ref }}
-          # LATEST: "true"
+      # - name: Build & Push to Docker Hub
+      #   uses: opspresso/action-builder@master
+      #   with:
+      #     args: --docker
+      #   env:
+      #     # USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      #     PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      #     # TAG_NAME: ${{ github.ref }}
+      #     # LATEST: "true"
 
       # - name: Build & Push to GitHub Package
       #   uses: opspresso/action-builder@master
