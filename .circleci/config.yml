@@ -21,7 +21,7 @@ jobs:
             - .
   publish:
     docker:
-      - image: opspresso/awscli
+      - image: circleci/aws-cli
     working_directory: ~/works
     steps:
       - attach_workspace:
@@ -29,11 +29,10 @@ jobs:
       - run:
           name: Publish
           command: |
-            tar
             bash ./target/builder.sh
   release:
     docker:
-      - image: opspresso/awscli
+      - image: circleci/golang
     working_directory: ~/works
     steps:
       - attach_workspace:
