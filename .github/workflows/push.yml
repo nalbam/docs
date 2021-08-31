@@ -19,7 +19,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
         run: |
-          ./dispatch.sh
+          bash ./dispatch.sh
 
       # - name: Bump Version
       #   uses: opspresso/action-builder@master
