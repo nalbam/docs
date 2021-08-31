@@ -15,16 +15,16 @@ jobs:
         with:
           fetch-depth: 1
 
-      # - name: Bump Version
-      #   uses: opspresso/action-builder@master
-      #   with:
-      #     args: --version
-
       - name: Repository Dispatch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           bash ./dispatch.sh
+
+      # - name: Bump Version
+      #   uses: opspresso/action-builder@master
+      #   with:
+      #     args: --version
 
       # - name: Release to GitHub
       #   uses: opspresso/action-builder@master
