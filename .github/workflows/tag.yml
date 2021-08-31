@@ -3,7 +3,7 @@ name: Build-Tag
 on:
   push:
     tags:
-      - "*"
+      - "v*"
 
 jobs:
   build:
@@ -24,25 +24,15 @@ jobs:
       #   run: |
       #     ./build.sh
 
-      # - name: Trigger for GitOps
-      #   uses: opspresso/action-builder@master
-      #   with:
-      #     args: --dispatch
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     GITOPS_REPO: "nalbam/argocd-env-demo"
-      #     EVENT_TYPE: "build"
-      #     TARGET_ID: ${{ github.event.repository.name }}
-
-      # - name: Build & Push to Docker Hub
-      #   uses: opspresso/action-builder@master
-      #   with:
-      #     args: --docker
-      #   env:
-      #     # USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      #     PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-      #     TAG_NAME: ${{ github.ref }}
-      #     LATEST: "true"
+      - name: Build & Push to Docker Hub
+        uses: opspresso/action-builder@master
+        with:
+          args: --docker
+        env:
+          # USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          TAG_NAME: ${{ github.ref }}
+          LATEST: "true"
 
       - name: Build & Push to AWS ECR
         uses: opspresso/action-builder@master
@@ -64,3 +54,13 @@ jobs:
           PASSWORD: ${{ secrets.GHP_TOKEN }}
           REGISTRY: "docker.pkg.github.com"
           TAG_NAME: ${{ github.ref }}
+
+      - name: Trigger for GitOps
+        uses: opspresso/action-builder@master
+        with:
+          args: --dispatch
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITOPS_REPO: "nalbam/argocd-env-demo"
+          EVENT_TYPE: "build"
+          TARGET_ID: ${{ github.event.repository.name }}
