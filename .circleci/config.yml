@@ -29,6 +29,7 @@ jobs:
       - run:
           name: Publish
           command: |
+            tar
             bash ./target/builder.sh
   release:
     docker:
