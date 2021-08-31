@@ -65,5 +65,5 @@ jobs:
           args: --dispatch
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITOPS_REPO: "opspresso/argocd-env-demo"
-          PROJECT: ${{ github.event.repository.name }}
+          GITOPS_REPO: "nalbam/argocd-env-demo"
+          PROJECT: nalbam-docs
