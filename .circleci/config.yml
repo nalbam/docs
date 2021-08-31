@@ -53,7 +53,8 @@ jobs:
       - run:
           name: Docker
           command: |
-            docker buildx ls
+            docker --help
+            # docker buildx ls
             bash ./target/builder.sh
   trigger:
     docker:
