@@ -24,8 +24,8 @@ jobs:
         uses: opspresso/action-builder@master
         with:
           args: --release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build & Push to Docker Hub
         uses: opspresso/action-builder@master
@@ -66,5 +66,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITOPS_REPO: "opspresso/argocd-env-demo"
-          EVENT_TYPE: "build"
-          TARGET_ID: ${{ github.event.repository.name }}
+          PROJECT: ${{ github.event.repository.name }}
