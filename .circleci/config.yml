@@ -53,7 +53,9 @@ jobs:
       - run:
           name: Docker
           command: |
+            export DOCKER_CLI_EXPERIMENTAL="enabled"
             docker version
+            docker --help
             bash ./target/builder.sh
   trigger:
     docker:
