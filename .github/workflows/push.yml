@@ -15,6 +15,10 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Repository Dispatch
+        run: |
+          bash ./dispatch.sh
+
       # - name: Bump Version
       #   uses: opspresso/action-builder@master
       #   with:
@@ -67,7 +71,3 @@ jobs:
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       #     GITOPS_REPO: "opspresso/argocd-env-demo"
       #     PROJECT: nalbam-docs
-
-      - name: Repository Dispatch
-        run: |
-          bash ./dispatch.sh
