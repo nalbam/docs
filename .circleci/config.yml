@@ -44,7 +44,6 @@ jobs:
   buildx:
     docker:
       - image: circleci/python
-      - image: jdrouet/docker-with-buildx:stable
     working_directory: ~/works
     steps:
       - attach_workspace:
@@ -54,17 +53,17 @@ jobs:
       - run:
           name: Docker
           command: |
-            # mkdir -p ~/.docker/cli-plugins
-            # url="https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64"
-            # curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
-            # chmod a+x ~/.docker/cli-plugins/docker-buildx
-            # export DOCKER_CLI_EXPERIMENTAL="enabled"
-            # docker buildx install
-            # docker run --rm --privileged multiarch/qemu-user-static:5.2.0-2 --reset -p yes
-            # docker rm -f buildx_buildkit_docker-multiarch0
-            # docker buildx create --name docker-multiarch --platform linux/amd64,linux/arm64
-            # docker buildx inspect --builder docker-multiarch --bootstrap
-            # docker buildx use docker-multiarch
+            mkdir -p ~/.docker/cli-plugins
+            url="https://github.com/docker/buildx/releases/download/v0.5.1/buildx-v0.5.1.linux-amd64"
+            curl -sSL -o ~/.docker/cli-plugins/docker-buildx $url
+            chmod a+x ~/.docker/cli-plugins/docker-buildx
+            export DOCKER_CLI_EXPERIMENTAL="enabled"
+            docker buildx install
+            docker run --rm --privileged multiarch/qemu-user-static:5.2.0-2 --reset -p yes
+            docker rm -f buildx_buildkit_docker-multiarch0
+            docker buildx create --name docker-multiarch --platform linux/amd64,linux/arm64
+            docker buildx inspect --builder docker-multiarch --bootstrap
+            docker buildx use docker-multiarch
             docker buildx version
 
             bash ./target/builder.sh
