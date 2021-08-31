@@ -66,5 +66,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GHP_TOKEN }}
           GITOPS_REPO: "opspresso/argocd-env-demo"
-          EVENT_TYPE: gitops
           PROJECT: nalbam-docs
