@@ -17,6 +17,7 @@ $RECYCLE.BIN/
 # Nodejs
 node_modules/
 package-lock.json
+build/
 dist/
 
 # eclipse
