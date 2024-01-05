@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>reveal-md</title>
+    <link rel="shortcut icon" href="./../../favicon.ico" />
+    <link rel="stylesheet" href="./../../dist/reset.css" />
+    <link rel="stylesheet" href="./../../dist/reveal.css" />
+    <link rel="stylesheet" href="./../../dist/theme/black.css" id="theme" />
+    <link rel="stylesheet" href="./../../css/highlight/base16/zenburn.css" />
+
+
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown data-separator="\r?\n---\r?\n" data-separator-vertical="\r?\n----\r?\n">
+          <textarea data-template>
+            # Install
+
+## AWS EC2 - Instance
+
+Amazon Linux AMI
+
+* <https://ap-southeast-1.console.aws.amazon.com/ec2/v2/home?region=ap-southeast-1#Instances>
+
+## Instance
+
+```bash
+# update
+sudo yum update -y
+
+# git, jq
+sudo yum install -y git vim jq
+
+# aws-cli
+pip install --upgrade --user awscli
+```
+
+## kubectl
+
+```bash
+export VERSION=$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)
+curl -LO https://storage.googleapis.com/kubernetes-release/release/${VERSION}/bin/linux/amd64/kubectl
+chmod +x kubectl && sudo mv kubectl /usr/local/bin/kubectl
+```
+
+* <https://kubernetes.io/>
+
+## kops
+
+```bash
+export VERSION=$(curl -s https://api.github.com/repos/kubernetes/kops/releases/latest | grep tag_name | cut -d'"' -f4)
+curl -LO https://github.com/kubernetes/kops/releases/download/${VERSION}/kops-linux-amd64
+chmod +x kops-linux-amd64 && sudo mv kops-linux-amd64 /usr/local/bin/kops
+```
+
+* <https://github.com/kubernetes/kops>
+
+## helm
+
+```bash
+export VERSION=$(curl -s https://api.github.com/repos/kubernetes/helm/releases/latest | grep tag_name | cut -d'"' -f4)
+curl -L https://storage.googleapis.com/kubernetes-helm/helm-${VERSION}-linux-amd64.tar.gz | tar xzv
+sudo mv linux-amd64/helm /usr/local/bin/helm
+```
+
+* <https://github.com/kubernetes/helm>
+
+## jenkins-x
+
+```bash
+export VERSION=$(curl -s https://api.github.com/repos/jenkins-x/jx/releases/latest | grep tag_name | cut -d'"' -f4)
+curl -L https://github.com/jenkins-x/jx/releases/download/${VERSION}/jx-linux-amd64.tar.gz | tar xzv
+sudo mv jx /usr/local/bin/jx
+```
+
+* <https://github.com/jenkins-x/jx>
+
+          </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="./../../dist/reveal.js"></script>
+
+    <script src="./../../plugin/markdown/markdown.js"></script>
+    <script src="./../../plugin/highlight/highlight.js"></script>
+    <script src="./../../plugin/zoom/zoom.js"></script>
+    <script src="./../../plugin/notes/notes.js"></script>
+    <script src="./../../plugin/math/math.js"></script>
+    <script>
+      function extend() {
+        var target = {};
+        for (var i = 0; i < arguments.length; i++) {
+          var source = arguments[i];
+          for (var key in source) {
+            if (source.hasOwnProperty(key)) {
+              target[key] = source[key];
+            }
+          }
+        }
+        return target;
+      }
+
+      // default options to init reveal.js
+      var defaultOptions = {
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+        transition: 'default', // none/fade/slide/convex/concave/zoom
+        slideNumber: true,
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealZoom,
+          RevealNotes,
+          RevealMath
+        ]
+      };
+
+      // options from URL query string
+      var queryOptions = Reveal().getQueryHash() || {};
+
+      var options = extend(defaultOptions, {"_":["."],"static":"build"}, queryOptions);
+    </script>
+
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+  </body>
+</html>
