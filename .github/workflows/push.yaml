@@ -16,7 +16,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Cache node-modules 💽
+      - name: Cache node-modules 📦
         uses: actions/cache@v2
         env:
           cache-name: cache-node-modules
@@ -24,7 +24,7 @@ jobs:
           path: ~/.npm
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
-      - name: Install and Build 🔧
+      - name: Install and Build 🏗️
         run: |
           npm install --no-optional reveal-md
           mkdir build
